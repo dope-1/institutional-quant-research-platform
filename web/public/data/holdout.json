@@ -1,0 +1,399 @@
+{
+  "integrity_warning": "After viewing these 2026 results, changing features, model hyperparameters, portfolio rules, or optimizer settings because of 2026 performance would contaminate this holdout. Future methodology changes require a new prospective period.",
+  "interpretation": "All four learned models have negative mean Rank IC over the first seven matured prospective months. This is negative early evidence, not a final statistical verdict.",
+  "methodology": {
+    "current_month": "The as-of calendar month is excluded from signal generation because it is not yet a completed month.",
+    "features": "Same stock-specific feature definitions as the frozen historical research pipeline.",
+    "historical_data": "Frozen pre-2026 Yahoo snapshot is never redownloaded or revised by Milestone 3D.",
+    "incremental_data": "Only 2026-onward market data are downloaded into a separate holdout snapshot.",
+    "models": "Feature families and hyperparameters are loaded from the frozen 2B/2C summaries; no 2026 selection occurs.",
+    "online_retraining": "Model parameters are refit monthly using the already-declared expanding matured-label rule; model specifications are unchanged.",
+    "optimizer": "Risk/turnover settings are loaded from the frozen 3C summary; no 2026 optimizer selection occurs.",
+    "portfolio_evaluation": "A 31-Dec-2025 activation signal starts a fresh deployment for Jan-2026; transaction costs include initial investment.",
+    "rank_evaluation": "Only 2026 signals with fully observed 21-trading-day forward returns are scored."
+  },
+  "portfolio_metrics": [
+    {
+      "annualized_return": 0.1937150237471221,
+      "annualized_turnover": 2.386050629721691,
+      "annualized_volatility": 0.1169082680014129,
+      "cvar_95_daily": 0.0152307415456505,
+      "information_ratio": null,
+      "max_drawdown": -0.0845683357985818,
+      "sharpe": 1.5732328763848449,
+      "sortino": 2.426714376480072,
+      "strategy": "equal_weight",
+      "total_return": 0.1237165672744178,
+      "var_95_daily": 0.0131585397976289
+    },
+    {
+      "annualized_return": 0.0961433247939156,
+      "annualized_turnover": 10.697456251716591,
+      "annualized_volatility": 0.2069473198571025,
+      "cvar_95_daily": 0.0264332244491303,
+      "information_ratio": -0.4909597448372357,
+      "max_drawdown": -0.151512345846194,
+      "sharpe": 0.5464480385761538,
+      "sortino": 0.8984919209940248,
+      "strategy": "lightgbm_heuristic",
+      "total_return": 0.0623358106093809,
+      "var_95_daily": 0.0216174488300054
+    },
+    {
+      "annualized_return": 0.0863274368586255,
+      "annualized_turnover": 5.39277839382813,
+      "annualized_volatility": 0.1364444741400088,
+      "cvar_95_daily": 0.0176694293901469,
+      "information_ratio": -1.1853426503496582,
+      "max_drawdown": -0.1066429895525978,
+      "sharpe": 0.6747995388081988,
+      "sortino": 1.1027945704398352,
+      "strategy": "lightgbm_optimized",
+      "total_return": 0.0560596017220931,
+      "var_95_daily": 0.0141363605498747
+    },
+    {
+      "annualized_return": 0.4408443918755758,
+      "annualized_turnover": 6.021140429713156,
+      "annualized_volatility": 0.2350661455033912,
+      "cvar_95_daily": 0.0299978611486671,
+      "information_ratio": 1.059310744653497,
+      "max_drawdown": -0.0906823104474429,
+      "sharpe": 1.6715636178453437,
+      "sortino": 2.7219739268097003,
+      "strategy": "momentum_top_quintile",
+      "total_return": 0.2719963192171852,
+      "var_95_daily": 0.0233413896622271
+    },
+    {
+      "annualized_return": 0.4395492912113874,
+      "annualized_turnover": 11.25724519531582,
+      "annualized_volatility": 0.2382863950453785,
+      "cvar_95_daily": 0.0294512318672706,
+      "information_ratio": 1.1191733658295764,
+      "max_drawdown": -0.1292647609261876,
+      "sharpe": 1.6483548740937497,
+      "sortino": 2.6263978155777976,
+      "strategy": "random_forest_heuristic",
+      "total_return": 0.2712430564886812,
+      "var_95_daily": 0.0227297909224852
+    },
+    {
+      "annualized_return": 0.1611692303286589,
+      "annualized_turnover": 4.734393101453674,
+      "annualized_volatility": 0.1207521589532376,
+      "cvar_95_daily": 0.0156753430204212,
+      "information_ratio": -0.3487849960283082,
+      "max_drawdown": -0.0944685843924419,
+      "sharpe": 1.2978306518689304,
+      "sortino": 2.0319221831478216,
+      "strategy": "random_forest_optimized",
+      "total_return": 0.1034397772545268,
+      "var_95_daily": 0.0124662437241365
+    },
+    {
+      "annualized_return": 0.0121065482324884,
+      "annualized_turnover": 20.410119036983964,
+      "annualized_volatility": 0.2291778598689983,
+      "cvar_95_daily": 0.0293359446018824,
+      "information_ratio": -0.6972771524895848,
+      "max_drawdown": -0.204599797016606,
+      "sharpe": 0.1661764804543489,
+      "sortino": 0.2630723756734051,
+      "strategy": "ridge_heuristic",
+      "total_return": 0.0079585623369637,
+      "var_95_daily": 0.0232307170602413
+    },
+    {
+      "annualized_return": 0.1950318810976805,
+      "annualized_turnover": 6.470745828261862,
+      "annualized_volatility": 0.1045649438264619,
+      "cvar_95_daily": 0.0123439668261757,
+      "information_ratio": -0.002345915442227,
+      "max_drawdown": -0.069767571244304,
+      "sharpe": 1.7563868707188326,
+      "sortino": 3.0889419314084634,
+      "strategy": "ridge_optimized",
+      "total_return": 0.1245330005286422,
+      "var_95_daily": 0.0086024538772913
+    },
+    {
+      "annualized_return": 0.2469175591512256,
+      "annualized_turnover": 8.792131772677163,
+      "annualized_volatility": 0.1941459029011417,
+      "cvar_95_daily": 0.0246165625855889,
+      "information_ratio": 0.4358335817826091,
+      "max_drawdown": -0.1254466010947926,
+      "sharpe": 1.233531323058728,
+      "sortino": 2.0816206539213784,
+      "strategy": "xgboost_heuristic",
+      "total_return": 0.1564615825702957,
+      "var_95_daily": 0.0210198878252968
+    },
+    {
+      "annualized_return": 0.1512797072996485,
+      "annualized_turnover": 6.020158630169759,
+      "annualized_volatility": 0.1184399547500773,
+      "cvar_95_daily": 0.0154096791631635,
+      "information_ratio": -0.4895915355126307,
+      "max_drawdown": -0.0915501468553059,
+      "sharpe": 1.2485783608652723,
+      "sortino": 2.050929079397256,
+      "strategy": "xgboost_optimized",
+      "total_return": 0.0972400995519482,
+      "var_95_daily": 0.0118672510067642
+    }
+  ],
+  "provenance": {
+    "artifact_sha256": {
+      "milestone3d/frozen_specifications.json": "dfea292a3cec8e7b30b9749ede36577e5cc411b0f5d2b442c5000433b925fc41",
+      "milestone3d/holdout_rank_ic.csv": "146f33d808417e10e72ac5af3cea8171906beb06a589b6f07233a3ce63e37f1e",
+      "milestone3d/holdout_rank_ic_summary.csv": "87a4c1c006110818e68bb12fc558504dd0abdaaafb6a3ce65dbd9fdc30687782",
+      "milestone3d/portfolio/performance_metrics.csv": "fe9758e8df766da5512cde1371190d106ad4cf6797575a13ecd6e6bc8cff5946",
+      "milestone3d/summary.json": "2e90e35d553cbd652666db193a60bc000a53faaaab078399ba3b919e67650932"
+    },
+    "artifacts": [
+      "milestone3d/frozen_specifications.json",
+      "milestone3d/holdout_rank_ic.csv",
+      "milestone3d/holdout_rank_ic_summary.csv",
+      "milestone3d/portfolio/performance_metrics.csv",
+      "milestone3d/summary.json"
+    ],
+    "methodology_freeze_date": "2026-09-01"
+  },
+  "rank_ic_by_month": [
+    {
+      "date": "2026-01-30",
+      "model": "lightgbm",
+      "n_assets": 60,
+      "rank_ic": -0.2445123645457071
+    },
+    {
+      "date": "2026-02-27",
+      "model": "lightgbm",
+      "n_assets": 60,
+      "rank_ic": -0.3602667407613226
+    },
+    {
+      "date": "2026-03-31",
+      "model": "lightgbm",
+      "n_assets": 60,
+      "rank_ic": 0.2312864684634621
+    },
+    {
+      "date": "2026-04-30",
+      "model": "lightgbm",
+      "n_assets": 60,
+      "rank_ic": 0.1953320366768547
+    },
+    {
+      "date": "2026-05-29",
+      "model": "lightgbm",
+      "n_assets": 60,
+      "rank_ic": -0.4397332592386775
+    },
+    {
+      "date": "2026-06-30",
+      "model": "lightgbm",
+      "n_assets": 60,
+      "rank_ic": -0.0313420394554042
+    },
+    {
+      "date": "2026-07-31",
+      "model": "lightgbm",
+      "n_assets": 60,
+      "rank_ic": -0.0478466240622395
+    },
+    {
+      "date": "2026-01-30",
+      "model": "random_forest",
+      "n_assets": 60,
+      "rank_ic": -0.3682133926090581
+    },
+    {
+      "date": "2026-02-27",
+      "model": "random_forest",
+      "n_assets": 60,
+      "rank_ic": -0.3109196999166436
+    },
+    {
+      "date": "2026-03-31",
+      "model": "random_forest",
+      "n_assets": 60,
+      "rank_ic": 0.2134481800500139
+    },
+    {
+      "date": "2026-04-30",
+      "model": "random_forest",
+      "n_assets": 60,
+      "rank_ic": 0.2639622117254793
+    },
+    {
+      "date": "2026-05-29",
+      "model": "random_forest",
+      "n_assets": 60,
+      "rank_ic": -0.3608780216726869
+    },
+    {
+      "date": "2026-06-30",
+      "model": "random_forest",
+      "n_assets": 60,
+      "rank_ic": -0.1579327590997499
+    },
+    {
+      "date": "2026-07-31",
+      "model": "random_forest",
+      "n_assets": 60,
+      "rank_ic": 0.0590163934426229
+    },
+    {
+      "date": "2026-01-30",
+      "model": "ridge",
+      "n_assets": 60,
+      "rank_ic": 0.0949708252292303
+    },
+    {
+      "date": "2026-02-27",
+      "model": "ridge",
+      "n_assets": 60,
+      "rank_ic": -0.0141706029452625
+    },
+    {
+      "date": "2026-03-31",
+      "model": "ridge",
+      "n_assets": 60,
+      "rank_ic": 0.0784106696304529
+    },
+    {
+      "date": "2026-04-30",
+      "model": "ridge",
+      "n_assets": 60,
+      "rank_ic": -0.0330091692136704
+    },
+    {
+      "date": "2026-05-29",
+      "model": "ridge",
+      "n_assets": 60,
+      "rank_ic": -0.19622117254793
+    },
+    {
+      "date": "2026-06-30",
+      "model": "ridge",
+      "n_assets": 60,
+      "rank_ic": -0.0482911919977771
+    },
+    {
+      "date": "2026-07-31",
+      "model": "ridge",
+      "n_assets": 60,
+      "rank_ic": -0.3409836065573771
+    },
+    {
+      "date": "2026-01-30",
+      "model": "xgboost",
+      "n_assets": 60,
+      "rank_ic": -0.3732147818838567
+    },
+    {
+      "date": "2026-02-27",
+      "model": "xgboost",
+      "n_assets": 60,
+      "rank_ic": -0.3195887746596277
+    },
+    {
+      "date": "2026-03-31",
+      "model": "xgboost",
+      "n_assets": 60,
+      "rank_ic": 0.2118366212836899
+    },
+    {
+      "date": "2026-04-30",
+      "model": "xgboost",
+      "n_assets": 60,
+      "rank_ic": 0.2776882467352042
+    },
+    {
+      "date": "2026-05-29",
+      "model": "xgboost",
+      "n_assets": 60,
+      "rank_ic": -0.4207835509863851
+    },
+    {
+      "date": "2026-06-30",
+      "model": "xgboost",
+      "n_assets": 60,
+      "rank_ic": -0.0867463184217838
+    },
+    {
+      "date": "2026-07-31",
+      "model": "xgboost",
+      "n_assets": 60,
+      "rank_ic": 0.0220061128091136
+    }
+  ],
+  "rank_ic_summary": [
+    {
+      "mean_rank_ic": -0.0995832175604334,
+      "median_rank_ic": -0.0478466240622395,
+      "model": "lightgbm",
+      "months": 7.0,
+      "positive_rank_ic_fraction": 0.2857142857142857,
+      "rank_ic_ir": -1.3221637312392431,
+      "rank_ic_std": 0.2609104883465381
+    },
+    {
+      "mean_rank_ic": -0.0945024411542889,
+      "median_rank_ic": -0.1579327590997499,
+      "model": "random_forest",
+      "months": 7.0,
+      "positive_rank_ic_fraction": 0.4285714285714285,
+      "rank_ic_ir": -1.203920599150276,
+      "rank_ic_std": 0.2719166523673463
+    },
+    {
+      "mean_rank_ic": -0.0656134640574763,
+      "median_rank_ic": -0.0330091692136704,
+      "model": "ridge",
+      "months": 7.0,
+      "positive_rank_ic_fraction": 0.2857142857142857,
+      "rank_ic_ir": -1.4700903464017356,
+      "rank_ic_std": 0.1546107063233336
+    },
+    {
+      "mean_rank_ic": -0.0984003493033779,
+      "median_rank_ic": -0.0867463184217838,
+      "model": "xgboost",
+      "months": 7.0,
+      "positive_rank_ic_fraction": 0.4285714285714285,
+      "rank_ic_ir": -1.204273726435997,
+      "rank_ic_std": 0.2830492781410578
+    }
+  ],
+  "schema_version": "1.0.0",
+  "status": "GENUINE_HOLDOUT_PARTIAL_YEAR",
+  "window": {
+    "activation_signal": "2025-12-31",
+    "completed_signal_dates": [
+      "2025-12-31",
+      "2026-01-30",
+      "2026-02-27",
+      "2026-03-31",
+      "2026-04-30",
+      "2026-05-29",
+      "2026-06-30",
+      "2026-07-31",
+      "2026-08-31"
+    ],
+    "holdout_start": "2026-01-01",
+    "latest_market_date": "2026-08-31",
+    "latest_matured_rank_signal": "2026-07-31",
+    "matured_rank_months_by_model": {
+      "lightgbm": 7,
+      "random_forest": 7,
+      "ridge": 7,
+      "xgboost": 7
+    },
+    "missing_universe_tickers": [],
+    "requested_as_of_exclusive": "2026-09-01"
+  }
+}

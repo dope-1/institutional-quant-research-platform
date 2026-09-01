@@ -1,0 +1,32 @@
+.venv/
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+*.py[cod]
+
+# Source-provider snapshots are user-local and must never be published.
+data/raw/
+data/holdout2026/raw/
+
+# Local credentials and provider state.
+.env
+.env.*
+!.env.example
+.vercel/
+
+# Temporary files created by atomic dashboard exports.
+web/public/data/*.tmp
+
+# Milestone 4B dashboard dependencies and build output.
+web/node_modules/
+web/.next/
+web/out/
+.coverage
+htmlcov/
+
+# Public repository data boundary
+artifacts.zip
+data/processed/
+data/holdout2026/processed/
+artifacts/**/*.parquet
+artifacts/**/*_targets.csv

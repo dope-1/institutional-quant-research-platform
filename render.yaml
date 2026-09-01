@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: institutional-quant-research-api
+    runtime: docker
+    plan: free
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /health
+    autoDeployTrigger: checksPass
+    envVars:
+      - key: QUANT_ARTIFACT_ROOT
+        value: /app/artifacts

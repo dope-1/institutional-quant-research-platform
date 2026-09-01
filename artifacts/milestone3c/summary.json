@@ -1,0 +1,229 @@
+{
+  "milestone": "3C",
+  "research_question": "Can the frozen ML alpha signals be translated into more institutional portfolios by explicitly balancing predicted alpha, covariance risk, position concentration, and turnover?",
+  "selection_policy": "For each already-frozen alpha model, optimizer risk-aversion/turnover settings are selected only on 2020-2022 validation net Sharpe. Lower turnover breaks exact Sharpe ties. The primary alpha source is also declared using validation only. No 2023-2025 optimizer choice is retuned.",
+  "historical_evaluation_disclosure": "The 2023-2025 period has been inspected in earlier milestones and remains a frozen historical evaluation period rather than a pristine holdout.",
+  "optimizer": {
+    "objective": "maximize alpha'w - risk_aversion*w'Sigma*w - turnover_penalty*|w-w_prev|_1",
+    "constraints": {
+      "long_only": true,
+      "fully_invested": true,
+      "max_weight": 0.1,
+      "candidate_turnover_caps": [
+        0.5,
+        0.6,
+        0.4,
+        0.75
+      ]
+    },
+    "covariance": "Ledoit-Wolf shrinkage on the trailing 252 trading days, requiring at least 126 observations, using data only through each signal date.",
+    "alpha": "Cross-sectionally standardized frozen model predictions scaled to 10.00% annual alpha per prediction z-score.",
+    "pretrade_state": "Previous target weights are drifted through realized returns to the current signal close before turnover is computed."
+  },
+  "selected_optimizer_candidates": {
+    "ridge": {
+      "name": "conservative",
+      "risk_aversion": 8.0,
+      "turnover_penalty": 0.04,
+      "turnover_cap": 0.5
+    },
+    "random_forest": {
+      "name": "conservative",
+      "risk_aversion": 8.0,
+      "turnover_penalty": 0.04,
+      "turnover_cap": 0.5
+    },
+    "xgboost": {
+      "name": "conservative",
+      "risk_aversion": 8.0,
+      "turnover_penalty": 0.04,
+      "turnover_cap": 0.5
+    },
+    "lightgbm": {
+      "name": "low_turnover",
+      "risk_aversion": 4.0,
+      "turnover_penalty": 0.06,
+      "turnover_cap": 0.4
+    }
+  },
+  "primary_validation_selected_alpha_model": "ridge",
+  "primary_historical_evaluation_metrics": {
+    "total_return": 0.45894275812107654,
+    "annualized_return": 0.1388648401902126,
+    "annualized_volatility": 0.12724762706368184,
+    "sharpe": 1.0857269684692126,
+    "sortino": 1.5149525369403631,
+    "max_drawdown": -0.16566679813873664,
+    "var_95_daily": 0.010907893158682621,
+    "cvar_95_daily": 0.017079904172702314,
+    "annualized_turnover": 5.918447749120979,
+    "information_ratio": -1.0469199494152448
+  },
+  "optimized_historical_evaluation_metrics": {
+    "ridge": {
+      "total_return": 0.45894275812107654,
+      "annualized_return": 0.1388648401902126,
+      "annualized_volatility": 0.12724762706368184,
+      "sharpe": 1.0857269684692126,
+      "sortino": 1.5149525369403631,
+      "max_drawdown": -0.16566679813873664,
+      "var_95_daily": 0.010907893158682621,
+      "cvar_95_daily": 0.017079904172702314,
+      "annualized_turnover": 5.918447749120979,
+      "information_ratio": -1.0469199494152448
+    },
+    "random_forest": {
+      "total_return": 0.7446198878044874,
+      "annualized_return": 0.2111794083569145,
+      "annualized_volatility": 0.13730706741772233,
+      "sharpe": 1.4643801885427332,
+      "sortino": 2.0256155539893257,
+      "max_drawdown": -0.16574786045309275,
+      "var_95_daily": 0.011676290858200638,
+      "cvar_95_daily": 0.01865089168180604,
+      "annualized_turnover": 4.279624509030133,
+      "information_ratio": -0.30552399806924213
+    },
+    "xgboost": {
+      "total_return": 0.6338522757805607,
+      "annualized_return": 0.18413474257141993,
+      "annualized_volatility": 0.13174280550490586,
+      "sharpe": 1.3490737200135916,
+      "sortino": 1.835689538092295,
+      "max_drawdown": -0.1456677157776265,
+      "var_95_daily": 0.011720849189169621,
+      "cvar_95_daily": 0.017839542072656298,
+      "annualized_turnover": 5.390011537708993,
+      "information_ratio": -0.6252157124111145
+    },
+    "lightgbm": {
+      "total_return": 0.7110058884570922,
+      "annualized_return": 0.203094380206994,
+      "annualized_volatility": 0.1448242782622988,
+      "sharpe": 1.3493991964876542,
+      "sortino": 1.8692451518839377,
+      "max_drawdown": -0.18054754615905977,
+      "var_95_daily": 0.013348639662152176,
+      "cvar_95_daily": 0.01969360401071331,
+      "annualized_turnover": 4.6880498363549945,
+      "information_ratio": -0.4316864866513984
+    }
+  },
+  "heuristic_historical_evaluation_metrics": {
+    "equal_weight": {
+      "total_return": 0.8579394072468418,
+      "annualized_return": 0.23770577574129748,
+      "annualized_volatility": 0.1423756736777674,
+      "sharpe": 1.5693572599487062,
+      "sortino": 2.145368194336071,
+      "max_drawdown": -0.17575065266612155,
+      "var_95_daily": 0.013343970427095758,
+      "cvar_95_daily": 0.01925224246195018,
+      "annualized_turnover": 0.9276149811912999,
+      "information_ratio": NaN
+    },
+    "momentum_top_quintile": {
+      "total_return": 1.25335748359797,
+      "annualized_return": 0.32271445159359335,
+      "annualized_volatility": 0.21976841761157026,
+      "sharpe": 1.3829508786606863,
+      "sortino": 1.958459119634333,
+      "max_drawdown": -0.24594832618219375,
+      "var_95_daily": 0.02084064713891702,
+      "cvar_95_daily": 0.03111638454354554,
+      "annualized_turnover": 6.7882020551627145,
+      "information_ratio": 0.5962202249456818
+    },
+    "ridge_heuristic": {
+      "total_return": 1.3518380874242575,
+      "annualized_return": 0.3423370291062473,
+      "annualized_volatility": 0.24364031304082093,
+      "sharpe": 1.3304737250166625,
+      "sortino": 1.8281072063626258,
+      "max_drawdown": -0.2877927517331821,
+      "var_95_daily": 0.023751279795320098,
+      "cvar_95_daily": 0.03452669790079927,
+      "annualized_turnover": 19.604836054506922,
+      "information_ratio": 0.6143866050267378
+    },
+    "random_forest_heuristic": {
+      "total_return": 0.9478397530835054,
+      "annualized_return": 0.25800468298113444,
+      "annualized_volatility": 0.21917880387823716,
+      "sharpe": 1.1569588788143241,
+      "sortino": 1.6576533452299367,
+      "max_drawdown": -0.24202442761946552,
+      "var_95_daily": 0.021234415022858333,
+      "cvar_95_daily": 0.030321206965793525,
+      "annualized_turnover": 11.036096334589734,
+      "information_ratio": 0.22738339339393185
+    },
+    "xgboost_heuristic": {
+      "total_return": 1.0298521108430183,
+      "annualized_return": 0.2759933152477976,
+      "annualized_volatility": 0.19182398334315945,
+      "sharpe": 1.3665446511127506,
+      "sortino": 1.9847557206910997,
+      "max_drawdown": -0.21240764993893102,
+      "var_95_daily": 0.01794959269007239,
+      "cvar_95_daily": 0.02588377456715198,
+      "annualized_turnover": 8.762521647875658,
+      "information_ratio": 0.4222322801900626
+    },
+    "lightgbm_heuristic": {
+      "total_return": 1.0442172106090957,
+      "annualized_return": 0.2790948536969433,
+      "annualized_volatility": 0.18744940846043237,
+      "sharpe": 1.407037947463421,
+      "sortino": 2.0833583390909713,
+      "max_drawdown": -0.21804972283073787,
+      "var_95_daily": 0.01796931619645599,
+      "cvar_95_daily": 0.024630678286080197,
+      "annualized_turnover": 10.442936739098851,
+      "information_ratio": 0.4611732329850357
+    }
+  },
+  "concentration_summary": [
+    {
+      "model": "lightgbm",
+      "candidate": "low_turnover",
+      "mean_positions": 15.857142857142858,
+      "mean_effective_n": 12.099024314740053,
+      "mean_max_weight": 0.09993653626248841,
+      "mean_ex_ante_volatility": 0.13948232432739366,
+      "mean_optimizer_turnover": 0.3890762449219792,
+      "post_initial_cap_relaxations": 0
+    },
+    {
+      "model": "random_forest",
+      "candidate": "conservative",
+      "mean_positions": 17.514285714285716,
+      "mean_effective_n": 12.611175719415797,
+      "mean_max_weight": 0.10000000000000002,
+      "mean_ex_ante_volatility": 0.1277682143618162,
+      "mean_optimizer_turnover": 0.3551797211576028,
+      "post_initial_cap_relaxations": 0
+    },
+    {
+      "model": "ridge",
+      "candidate": "conservative",
+      "mean_positions": 18.02857142857143,
+      "mean_effective_n": 12.974149160536019,
+      "mean_max_weight": 0.10000000000000002,
+      "mean_ex_ante_volatility": 0.1189413008246392,
+      "mean_optimizer_turnover": 0.49119090162772727,
+      "post_initial_cap_relaxations": 0
+    },
+    {
+      "model": "xgboost",
+      "candidate": "conservative",
+      "mean_positions": 17.428571428571427,
+      "mean_effective_n": 12.776663557702813,
+      "mean_max_weight": 0.10000000000000002,
+      "mean_ex_ante_volatility": 0.1246684824981375,
+      "mean_optimizer_turnover": 0.44733429088469195,
+      "post_initial_cap_relaxations": 0
+    }
+  ],
+  "constraint_disclosure": "If a configured turnover cap is mathematically infeasible because of the initial investment or a position-cap repair, it is relaxed only to the minimum feasible turnover and explicitly flagged in diagnostics."
+}

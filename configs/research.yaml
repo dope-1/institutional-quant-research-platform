@@ -1,0 +1,385 @@
+project:
+  name: institutional-quant-research-platform
+  random_seed: 42
+
+research:
+  # Fixed historical cutoff improves reproducibility of the first milestone.
+  start_date: "2012-01-01"
+  end_date: "2025-12-31"
+  label_horizon_days: 21
+  annualization_days: 252
+
+universe:
+  # Static, liquid US equity universe for engineering validation only.
+  # It is NOT point-in-time membership and therefore is survivorship-biased.
+  tickers:
+    - AAPL
+    - MSFT
+    - NVDA
+    - AMZN
+    - GOOGL
+    - META
+    - AVGO
+    - BRK-B
+    - JPM
+    - V
+    - MA
+    - XOM
+    - COST
+    - UNH
+    - NFLX
+    - WMT
+    - PG
+    - JNJ
+    - HD
+    - BAC
+    - ABBV
+    - KO
+    - CRM
+    - ORCL
+    - CVX
+    - MRK
+    - CSCO
+    - WFC
+    - IBM
+    - CAT
+    - GE
+    - MCD
+    - AXP
+    - GS
+    - MS
+    - DIS
+    - QCOM
+    - AMD
+    - AMAT
+    - TXN
+    - INTU
+    - NOW
+    - UBER
+    - PEP
+    - LIN
+    - ACN
+    - DHR
+    - NEE
+    - PM
+    - RTX
+    - HON
+    - LOW
+    - SPGI
+    - BLK
+    - ISRG
+    - AMGN
+    - TMO
+    - BKNG
+    - SBUX
+    - PLD
+
+market_data:
+  provider: yfinance
+  auto_adjust: true
+  actions: false
+  cache_raw: true
+
+macro:
+  enabled: true
+  fred_series:
+    DGS10: treasury_10y
+    DGS2: treasury_2y
+    VIXCLS: vix
+    DFF: fed_funds
+
+factors:
+  enabled: true
+  dataset: F-F_Research_Data_Factors_daily
+
+features:
+  momentum_windows: [21, 63, 126, 252]
+  volatility_windows: [21, 63]
+  liquidity_window: 21
+  use_12_1_momentum: true
+
+backtest:
+  rebalance: monthly
+  momentum_top_fraction: 0.20
+  transaction_cost_bps: 5.0
+  slippage_bps: 2.0
+  min_assets: 10
+
+split:
+  train_end: "2019-12-31"
+  validation_end: "2022-12-31"
+  test_end: "2025-12-31"
+
+
+audit:
+  # Review flag only: large adjusted returns are not automatically treated as bad data.
+  extreme_abs_daily_return_threshold: 0.25
+
+ml:
+  # Milestone 2A intentionally starts with stock-specific features. Market-wide
+  # macro/factor levels have no same-day cross-sectional variation; they are
+  # reserved for later interaction/regime models.
+  feature_columns:
+    - momentum_21d
+    - momentum_63d
+    - momentum_126d
+    - momentum_252d
+    - momentum_6_1
+    - momentum_12_1
+    - volatility_21d
+    - volatility_63d
+    - log_dollar_volume
+    - dollar_volume_median_21d
+    - amihud_21d
+  target_column: forward_return_21d
+  min_assets_per_cross_section: 40
+  min_assets_for_ic: 20
+  min_training_rows: 1000
+  deciles: 10
+  ridge:
+    alpha_grid: [0.01, 0.1, 1.0, 10.0, 100.0]
+  portfolio:
+    top_fraction: 0.20
+    min_assets: 20
+  robustness:
+    # Milestone 2B: all model/portfolio choices are frozen using validation only.
+    feature_groups:
+      momentum_only:
+        - momentum_21d
+        - momentum_63d
+        - momentum_126d
+        - momentum_252d
+        - momentum_6_1
+        - momentum_12_1
+      volatility_only:
+        - volatility_21d
+        - volatility_63d
+      liquidity_only:
+        - log_dollar_volume
+        - dollar_volume_median_21d
+        - amihud_21d
+      momentum_volatility:
+        - momentum_21d
+        - momentum_63d
+        - momentum_126d
+        - momentum_252d
+        - momentum_6_1
+        - momentum_12_1
+        - volatility_21d
+        - volatility_63d
+      momentum_liquidity:
+        - momentum_21d
+        - momentum_63d
+        - momentum_126d
+        - momentum_252d
+        - momentum_6_1
+        - momentum_12_1
+        - log_dollar_volume
+        - dollar_volume_median_21d
+        - amihud_21d
+      all_features:
+        - momentum_21d
+        - momentum_63d
+        - momentum_126d
+        - momentum_252d
+        - momentum_6_1
+        - momentum_12_1
+        - volatility_21d
+        - volatility_63d
+        - log_dollar_volume
+        - dollar_volume_median_21d
+        - amihud_21d
+    portfolio_variants:
+      - name: top10_equal
+        kind: equal_weight_top
+        top_fraction: 0.10
+      - name: top20_equal
+        kind: equal_weight_top
+        top_fraction: 0.20
+      - name: top30_equal
+        kind: equal_weight_top
+        top_fraction: 0.30
+      - name: top20_buffered
+        kind: buffered_top
+        top_fraction: 0.20
+        exit_fraction: 0.30
+      - name: top20_rank_weighted
+        kind: rank_weighted_top
+        top_fraction: 0.20
+    bootstrap:
+      samples: 5000
+      confidence: 0.95
+      seed: 42
+  nonlinear:
+    # Milestone 2C. All feature-family, hyperparameter, and portfolio choices are
+    # made on 2020-2022 validation only. Test is evaluated after freezing.
+    feature_group_names: [momentum_only, momentum_volatility, all_features]
+    model_families:
+      random_forest:
+        candidates:
+          - name: rf_shallow
+            params:
+              n_estimators: 400
+              max_depth: 3
+              min_samples_leaf: 40
+              max_features: 0.75
+          - name: rf_medium
+            params:
+              n_estimators: 500
+              max_depth: 5
+              min_samples_leaf: 25
+              max_features: 0.75
+          - name: rf_broad
+            params:
+              n_estimators: 500
+              max_depth: 7
+              min_samples_leaf: 40
+              max_features: 1.0
+      xgboost:
+        candidates:
+          - name: xgb_conservative
+            params:
+              n_estimators: 300
+              learning_rate: 0.03
+              max_depth: 2
+              min_child_weight: 40.0
+              subsample: 0.80
+              colsample_bytree: 0.80
+              reg_alpha: 0.0
+              reg_lambda: 20.0
+          - name: xgb_medium
+            params:
+              n_estimators: 400
+              learning_rate: 0.03
+              max_depth: 3
+              min_child_weight: 25.0
+              subsample: 0.80
+              colsample_bytree: 0.80
+              reg_alpha: 0.5
+              reg_lambda: 10.0
+          - name: xgb_regularized
+            params:
+              n_estimators: 300
+              learning_rate: 0.05
+              max_depth: 2
+              min_child_weight: 20.0
+              subsample: 0.85
+              colsample_bytree: 0.85
+              reg_alpha: 1.0
+              reg_lambda: 30.0
+      lightgbm:
+        candidates:
+          - name: lgb_shallow
+            params:
+              n_estimators: 300
+              learning_rate: 0.03
+              num_leaves: 7
+              min_child_samples: 75
+              subsample: 0.80
+              colsample_bytree: 0.80
+              reg_alpha: 0.0
+              reg_lambda: 10.0
+          - name: lgb_medium
+            params:
+              n_estimators: 400
+              learning_rate: 0.03
+              num_leaves: 15
+              min_child_samples: 50
+              subsample: 0.80
+              colsample_bytree: 0.80
+              reg_alpha: 0.5
+              reg_lambda: 10.0
+          - name: lgb_regularized
+            params:
+              n_estimators: 300
+              learning_rate: 0.05
+              num_leaves: 7
+              min_child_samples: 50
+              subsample: 0.85
+              colsample_bytree: 0.85
+              reg_alpha: 1.0
+              reg_lambda: 20.0
+    # Reuse the same predeclared 2B variants; each nonlinear model selects its
+    # own implementation using validation Sharpe, then freezes it for test.
+    portfolio_variant_names:
+      - top10_equal
+      - top20_equal
+      - top30_equal
+      - top20_buffered
+      - top20_rank_weighted
+    bootstrap:
+      samples: 5000
+      confidence: 0.95
+      seed: 42
+
+  explainability:
+    # Milestone 3A is post-hoc analysis only. It never selects or retunes a model.
+    models: [random_forest, xgboost, lightgbm]
+    permutation_repeats: 10
+    shap_interaction_max_rows: 600
+    interaction_pairs:
+      - [rank__momentum_63d, rank__dollar_volume_median_21d]
+      - [rank__momentum_63d, rank__volatility_63d]
+      - [rank__momentum_126d, rank__log_dollar_volume]
+
+  regime_analysis:
+    # Milestone 3B is diagnostic only: never switch/tune a model from these labels.
+    regime_columns:
+      - vix_regime
+      - treasury_10y_regime
+      - fed_funds_regime
+      - rate_direction
+      - yield_curve_regime
+      - market_trend_regime
+    # Level thresholds use prior observations only, so future macro distributions
+    # cannot rewrite an earlier signal date's regime.
+    quantile_lookback_days: 504
+    quantile_min_history_days: 252
+    lower_quantile: 0.3333333333
+    upper_quantile: 0.6666666667
+    rate_direction_window_days: 63
+    rate_flat_threshold_pp: 0.10
+    yield_curve_flat_upper_pp: 0.25
+    market_trend_window_days: 63
+    min_regime_months_for_interpretation: 6
+    bootstrap:
+      samples: 2000
+      confidence: 0.95
+      seed: 42
+
+  portfolio_optimization:
+    # Milestone 3C: validation-selected portfolio construction only. Alpha-model
+    # specifications remain frozen from 2B/2C; 3C does not retrain or retune them.
+    alpha_models: [ridge, random_forest, xgboost, lightgbm]
+    alpha_scale_annual: 0.10
+    covariance_lookback_days: 252
+    covariance_min_history_days: 126
+    max_weight: 0.10
+    min_assets: 40
+    candidates:
+      - name: conservative
+        risk_aversion: 8.0
+        turnover_penalty: 0.04
+        turnover_cap: 0.50
+      - name: balanced
+        risk_aversion: 4.0
+        turnover_penalty: 0.02
+        turnover_cap: 0.60
+      - name: low_turnover
+        risk_aversion: 4.0
+        turnover_penalty: 0.06
+        turnover_cap: 0.40
+      - name: alpha_tilt
+        risk_aversion: 2.0
+        turnover_penalty: 0.01
+        turnover_cap: 0.75
+    # Selection is still validation-only and uses net Sharpe after the existing
+    # transaction-cost/slippage engine. Lower turnover breaks exact Sharpe ties.
+    selection_metric: sharpe
+
+  holdout2026:
+    # Milestone 3D is the first genuinely new prospective evaluation period.
+    # The command downloads only incremental 2026 market data and never rewrites
+    # the frozen 2012-2025 raw snapshot. Override with --as-of for later reruns.
+    start_date: "2026-01-01"
+    as_of_date: "2026-09-01"

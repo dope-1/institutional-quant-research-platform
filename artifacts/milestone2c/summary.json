@@ -1,0 +1,327 @@
+{
+  "milestone": "2C",
+  "research_question": "Do validation-selected nonlinear tree models add more persistent cross-sectional ranking and portfolio value than the frozen Ridge and conventional baselines?",
+  "selection_policy": "For each nonlinear model family, feature group and hyperparameters are selected only by 2020-2022 validation mean Rank IC. Portfolio implementation is then selected only by validation Sharpe with lower turnover as tie-breaker. These choices are frozen before evaluating 2023-2025.",
+  "test_reuse_disclosure": "The 2023-2025 evaluation period was already inspected in Milestones 2A and 2B. Milestone 2C does not tune on it, but it is therefore a frozen historical evaluation period rather than a pristine never-seen holdout.",
+  "selected_models": {
+    "random_forest": {
+      "feature_group": "all_features",
+      "rank_features": [
+        "rank__momentum_21d",
+        "rank__momentum_63d",
+        "rank__momentum_126d",
+        "rank__momentum_252d",
+        "rank__momentum_6_1",
+        "rank__momentum_12_1",
+        "rank__volatility_21d",
+        "rank__volatility_63d",
+        "rank__log_dollar_volume",
+        "rank__dollar_volume_median_21d",
+        "rank__amihud_21d"
+      ],
+      "candidate": "rf_shallow",
+      "params": {
+        "n_estimators": 400,
+        "max_depth": 3,
+        "min_samples_leaf": 40,
+        "max_features": 0.75
+      },
+      "portfolio_variant": {
+        "name": "top20_rank_weighted",
+        "kind": "rank_weighted_top",
+        "top_fraction": 0.2
+      },
+      "validation_leader": {
+        "model": "random_forest",
+        "feature_group": "all_features",
+        "candidate": "rf_shallow",
+        "candidate_order": 0,
+        "params_json": "{\"max_depth\": 3, \"max_features\": 0.75, \"min_samples_leaf\": 40, \"n_estimators\": 400}",
+        "validation_mean_rank_ic": 0.04118434650019094,
+        "validation_median_rank_ic": 0.08185607113086969,
+        "validation_rank_ic_std": 0.18733942373467555,
+        "validation_rank_ic_ir": 0.7615415825755927,
+        "validation_positive_rank_ic_fraction": 0.6571428571428571,
+        "validation_months": 35.0
+      },
+      "test_statistics": {
+        "rank_ic": {
+          "mean_rank_ic": 0.034128527765649196,
+          "median_rank_ic": 0.0387329813837177,
+          "rank_ic_std": 0.17924275937324366,
+          "rank_ic_ir": 0.659578599261996,
+          "positive_rank_ic_fraction": 0.6285714285714286,
+          "months": 35.0,
+          "t_stat": 1.1264449054863783,
+          "bootstrap_ci_low": -0.02394990672012066,
+          "bootstrap_ci_high": 0.09410312388361847,
+          "confidence": 0.95
+        },
+        "top_bottom_spread": {
+          "mean": 0.011453016586322343,
+          "median": 0.004517415908369033,
+          "positive_fraction": 0.6,
+          "months": 35,
+          "t_stat": 1.1101708018048362,
+          "bootstrap_ci_low": -0.008585052486616783,
+          "bootstrap_ci_high": 0.031388502626980966,
+          "confidence": 0.95
+        }
+      },
+      "test_portfolio_metrics": {
+        "total_return": 0.9478397530835054,
+        "annualized_return": 0.25800468298113444,
+        "annualized_volatility": 0.21917880387823716,
+        "sharpe": 1.1569588788143241,
+        "sortino": 1.6576533452299367,
+        "max_drawdown": -0.24202442761946552,
+        "var_95_daily": 0.021234415022858333,
+        "cvar_95_daily": 0.030321206965793525,
+        "annualized_turnover": 11.036096334589734,
+        "information_ratio": 0.22738339339393185
+      }
+    },
+    "xgboost": {
+      "feature_group": "all_features",
+      "rank_features": [
+        "rank__momentum_21d",
+        "rank__momentum_63d",
+        "rank__momentum_126d",
+        "rank__momentum_252d",
+        "rank__momentum_6_1",
+        "rank__momentum_12_1",
+        "rank__volatility_21d",
+        "rank__volatility_63d",
+        "rank__log_dollar_volume",
+        "rank__dollar_volume_median_21d",
+        "rank__amihud_21d"
+      ],
+      "candidate": "xgb_conservative",
+      "params": {
+        "n_estimators": 300,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "min_child_weight": 40.0,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "reg_alpha": 0.0,
+        "reg_lambda": 20.0
+      },
+      "portfolio_variant": {
+        "name": "top20_buffered",
+        "kind": "buffered_top",
+        "top_fraction": 0.2,
+        "exit_fraction": 0.3
+      },
+      "validation_leader": {
+        "model": "xgboost",
+        "feature_group": "all_features",
+        "candidate": "xgb_conservative",
+        "candidate_order": 0,
+        "params_json": "{\"colsample_bytree\": 0.8, \"learning_rate\": 0.03, \"max_depth\": 2, \"min_child_weight\": 40.0, \"n_estimators\": 300, \"reg_alpha\": 0.0, \"reg_lambda\": 20.0, \"subsample\": 0.8}",
+        "validation_mean_rank_ic": 0.03700152067418838,
+        "validation_median_rank_ic": 0.07808299240210405,
+        "validation_rank_ic_std": 0.1783193698911557,
+        "validation_rank_ic_ir": 0.7188059693584994,
+        "validation_positive_rank_ic_fraction": 0.6285714285714286,
+        "validation_months": 35.0
+      },
+      "test_statistics": {
+        "rank_ic": {
+          "mean_rank_ic": 0.014780296113999922,
+          "median_rank_ic": 0.014781883856626845,
+          "rank_ic_std": 0.1796781600596779,
+          "rank_ic_ir": 0.28495643334568765,
+          "positive_rank_ic_fraction": 0.5142857142857142,
+          "months": 35.0,
+          "t_stat": 0.4866557571561183,
+          "bootstrap_ci_low": -0.043890366371611145,
+          "bootstrap_ci_high": 0.07540352478863176,
+          "confidence": 0.95
+        },
+        "top_bottom_spread": {
+          "mean": 0.0047106862290827315,
+          "median": -0.0018640199139121245,
+          "positive_fraction": 0.4857142857142857,
+          "months": 35,
+          "t_stat": 0.4584383778281744,
+          "bootstrap_ci_low": -0.014659773362437862,
+          "bootstrap_ci_high": 0.025270472974556594,
+          "confidence": 0.95
+        }
+      },
+      "test_portfolio_metrics": {
+        "total_return": 1.0298521108430183,
+        "annualized_return": 0.2759933152477976,
+        "annualized_volatility": 0.19182398334315945,
+        "sharpe": 1.3665446511127506,
+        "sortino": 1.9847557206910997,
+        "max_drawdown": -0.21240764993893102,
+        "var_95_daily": 0.01794959269007239,
+        "cvar_95_daily": 0.02588377456715198,
+        "annualized_turnover": 8.762521647875658,
+        "information_ratio": 0.4222322801900626
+      }
+    },
+    "lightgbm": {
+      "feature_group": "all_features",
+      "rank_features": [
+        "rank__momentum_21d",
+        "rank__momentum_63d",
+        "rank__momentum_126d",
+        "rank__momentum_252d",
+        "rank__momentum_6_1",
+        "rank__momentum_12_1",
+        "rank__volatility_21d",
+        "rank__volatility_63d",
+        "rank__log_dollar_volume",
+        "rank__dollar_volume_median_21d",
+        "rank__amihud_21d"
+      ],
+      "candidate": "lgb_shallow",
+      "params": {
+        "n_estimators": 300,
+        "learning_rate": 0.03,
+        "num_leaves": 7,
+        "min_child_samples": 75,
+        "subsample": 0.8,
+        "colsample_bytree": 0.8,
+        "reg_alpha": 0.0,
+        "reg_lambda": 10.0
+      },
+      "portfolio_variant": {
+        "name": "top20_buffered",
+        "kind": "buffered_top",
+        "top_fraction": 0.2,
+        "exit_fraction": 0.3
+      },
+      "validation_leader": {
+        "model": "lightgbm",
+        "feature_group": "all_features",
+        "candidate": "lgb_shallow",
+        "candidate_order": 0,
+        "params_json": "{\"colsample_bytree\": 0.8, \"learning_rate\": 0.03, \"min_child_samples\": 75, \"n_estimators\": 300, \"num_leaves\": 7, \"reg_alpha\": 0.0, \"reg_lambda\": 10.0, \"subsample\": 0.8}",
+        "validation_mean_rank_ic": 0.01671520687875806,
+        "validation_median_rank_ic": 0.0629619338705196,
+        "validation_rank_ic_std": 0.18398485448690838,
+        "validation_rank_ic_ir": 0.31471707444368824,
+        "validation_positive_rank_ic_fraction": 0.6,
+        "validation_months": 35.0
+      },
+      "test_statistics": {
+        "rank_ic": {
+          "mean_rank_ic": 0.006060413606954313,
+          "median_rank_ic": -0.025229230341761607,
+          "rank_ic_std": 0.1783928325324979,
+          "rank_ic_ir": 0.11768347565437526,
+          "positive_rank_ic_fraction": 0.4857142857142857,
+          "months": 35.0,
+          "t_stat": 0.20098279683289808,
+          "bootstrap_ci_low": -0.05140054777120629,
+          "bootstrap_ci_high": 0.0641579010042472,
+          "confidence": 0.95
+        },
+        "top_bottom_spread": {
+          "mean": -0.0023850811458125468,
+          "median": -0.00999622494365025,
+          "positive_fraction": 0.37142857142857144,
+          "months": 35,
+          "t_stat": -0.24441011399131884,
+          "bootstrap_ci_low": -0.020845211052864358,
+          "bootstrap_ci_high": 0.016838329537569183,
+          "confidence": 0.95
+        }
+      },
+      "test_portfolio_metrics": {
+        "total_return": 1.0442172106090957,
+        "annualized_return": 0.2790948536969433,
+        "annualized_volatility": 0.18744940846043237,
+        "sharpe": 1.407037947463421,
+        "sortino": 2.0833583390909713,
+        "max_drawdown": -0.21804972283073787,
+        "var_95_daily": 0.01796931619645599,
+        "cvar_95_daily": 0.024630678286080197,
+        "annualized_turnover": 10.442936739098851,
+        "information_ratio": 0.4611732329850357
+      }
+    }
+  },
+  "frozen_ridge_m2b": {
+    "selected_feature_group": "momentum_only",
+    "selected_alpha": 10.0,
+    "selected_portfolio_variant": {
+      "name": "top10_equal",
+      "kind": "equal_weight_top",
+      "top_fraction": 0.1
+    },
+    "test_statistical_robustness": {
+      "rank_ic": {
+        "mean_rank_ic": -0.03609256539514946,
+        "median_rank_ic": -0.03484301194776327,
+        "rank_ic_std": 0.22857709881515323,
+        "rank_ic_ir": -0.5469853048616683,
+        "positive_rank_ic_fraction": 0.45714285714285713,
+        "months": 35.0,
+        "t_stat": -0.9341552481034862,
+        "bootstrap_ci_low": -0.1132833326717739,
+        "bootstrap_ci_high": 0.03795506688365818,
+        "confidence": 0.95
+      },
+      "top_bottom_spread": {
+        "mean": 0.005062809657855106,
+        "median": 0.008479680579964441,
+        "positive_fraction": 0.5142857142857142,
+        "months": 35,
+        "t_stat": 0.41548936812401555,
+        "bootstrap_ci_low": -0.01761537823844042,
+        "bootstrap_ci_high": 0.030266703505063036,
+        "confidence": 0.95
+      }
+    },
+    "test_portfolio_metrics": {
+      "total_return": 1.3518380874242575,
+      "annualized_return": 0.3423370291062473,
+      "annualized_volatility": 0.24364031304082093,
+      "sharpe": 1.3304737250166625,
+      "sortino": 1.8281072063626258,
+      "max_drawdown": -0.2877927517331821,
+      "var_95_daily": 0.023751279795320098,
+      "cvar_95_daily": 0.03452669790079927,
+      "annualized_turnover": 19.604836054506922,
+      "information_ratio": 0.6143866050267378
+    }
+  },
+  "benchmark_portfolio_metrics": {
+    "equal_weight": {
+      "total_return": 0.8579394072468418,
+      "annualized_return": 0.23770577574129748,
+      "annualized_volatility": 0.1423756736777674,
+      "sharpe": 1.5693572599487062,
+      "sortino": 2.145368194336071,
+      "max_drawdown": -0.17575065266612155,
+      "var_95_daily": 0.013343970427095758,
+      "cvar_95_daily": 0.01925224246195018,
+      "annualized_turnover": 0.9276149811912999
+    },
+    "momentum_top_quintile": {
+      "total_return": 1.25335748359797,
+      "annualized_return": 0.32271445159359335,
+      "annualized_volatility": 0.21976841761157026,
+      "sharpe": 1.3829508786606863,
+      "sortino": 1.958459119634333,
+      "max_drawdown": -0.24594832618219375,
+      "var_95_daily": 0.02084064713891702,
+      "cvar_95_daily": 0.03111638454354554,
+      "annualized_turnover": 6.7882020551627145,
+      "information_ratio": 0.5962202249456818
+    }
+  },
+  "methodology": {
+    "target": "centered cross-sectional rank of 21-trading-day forward return",
+    "features": "centered cross-sectional percentile-rank features from the existing 2A monthly dataset",
+    "walk_forward": "expanding monthly training with label_end_date strictly before each signal date",
+    "models": "Random Forest, XGBoost, and LightGBM with compact predeclared validation grids",
+    "importance": "native tree importance from a reference model fitted immediately before the first test signal",
+    "portfolio": "model-specific validation-selected long-only portfolio variant using the 1.2 drift-aware cost engine"
+  }
+}

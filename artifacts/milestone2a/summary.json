@@ -1,0 +1,73 @@
+{
+  "milestone": "2A",
+  "research_question": "Can a regularised linear model improve cross-sectional equity return ranking and test-period portfolio performance relative to hardened baselines?",
+  "best_alpha_selected_on_validation": 0.01,
+  "validation_rank_ic": {
+    "mean_rank_ic": 0.016335407892449604,
+    "median_rank_ic": 0.019560989163656575,
+    "rank_ic_std": 0.22412483921346107,
+    "rank_ic_ir": 0.2524821124813996,
+    "positive_rank_ic_fraction": 0.6285714285714286,
+    "months": 35.0
+  },
+  "test_rank_ic": {
+    "mean_rank_ic": 0.03705156194180923,
+    "median_rank_ic": 0.03161989441511531,
+    "rank_ic_std": 0.19703356338516925,
+    "rank_ic_ir": 0.6514137660652939,
+    "positive_rank_ic_fraction": 0.5714285714285714,
+    "months": 35.0
+  },
+  "test_mean_top_minus_bottom_decile_forward_return": 0.016087258279377632,
+  "pretest_reference_training_rows": 6970,
+  "test_portfolio_window": {
+    "start": "2023-02-01",
+    "end": "2025-12-31",
+    "signal_months": 35
+  },
+  "test_portfolio_metrics": {
+    "equal_weight": {
+      "total_return": 0.8579394072468418,
+      "annualized_return": 0.23770577574129748,
+      "annualized_volatility": 0.1423756736777674,
+      "sharpe": 1.5693572599487062,
+      "sortino": 2.145368194336071,
+      "max_drawdown": -0.17575065266612155,
+      "var_95_daily": 0.013343970427095758,
+      "cvar_95_daily": 0.01925224246195018,
+      "annualized_turnover": 0.9276149811912999
+    },
+    "momentum_top_quintile": {
+      "total_return": 1.25335748359797,
+      "annualized_return": 0.32271445159359335,
+      "annualized_volatility": 0.21976841761157026,
+      "sharpe": 1.3829508786606863,
+      "sortino": 1.958459119634333,
+      "max_drawdown": -0.24594832618219375,
+      "var_95_daily": 0.02084064713891702,
+      "cvar_95_daily": 0.03111638454354554,
+      "annualized_turnover": 6.7882020551627145,
+      "information_ratio": 0.5962202249456818
+    },
+    "ridge_top_quintile": {
+      "total_return": 1.2483856693116704,
+      "annualized_return": 0.32170901473290847,
+      "annualized_volatility": 0.19643127867622828,
+      "sharpe": 1.5186748258579128,
+      "sortino": 2.0816123618956484,
+      "max_drawdown": -0.2391199992234999,
+      "var_95_daily": 0.01992489992293423,
+      "cvar_95_daily": 0.02819970603464203,
+      "annualized_turnover": 13.501665218900925,
+      "information_ratio": 0.7382267506721821
+    }
+  },
+  "methodology": {
+    "features": "stock-specific centered cross-sectional percentile ranks",
+    "target": "centered cross-sectional rank of 21-trading-day forward return",
+    "validation": "expanding monthly walk-forward; alpha chosen by mean Rank IC",
+    "test": "untouched until alpha selection, then expanding monthly walk-forward",
+    "label_availability_rule": "training label_end_date must be strictly before signal date",
+    "portfolio": "equal-weight long-only top prediction quintile with drift-aware costs"
+  }
+}

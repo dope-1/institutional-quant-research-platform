@@ -1,0 +1,19 @@
+.git
+.github
+.venv
+__pycache__
+*.py[cod]
+.pytest_cache
+.ruff_cache
+.mypy_cache
+*.zip
+
+# Source data and frontend files are not needed in the API image.
+data
+web
+tests
+docs
+
+# The API reads derived JSON/CSV summaries, not heavy research binaries.
+artifacts/**/*.parquet
+artifacts/**/*.png

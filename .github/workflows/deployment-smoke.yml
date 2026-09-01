@@ -1,0 +1,33 @@
+name: deployment-smoke
+
+on:
+  workflow_dispatch:
+    inputs:
+      dashboard_url:
+        description: Production dashboard base URL
+        required: true
+        type: string
+      api_url:
+        description: Production API base URL
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Check dashboard and supplemental API
+        env:
+          DASHBOARD_URL: ${{ inputs.dashboard_url }}
+          API_URL: ${{ inputs.api_url }}
+        run: >-
+          python scripts/smoke_deployment.py
+          --dashboard-url "$DASHBOARD_URL"
+          --api-url "$API_URL"

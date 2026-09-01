@@ -1,0 +1,97 @@
+{
+  "chronology_safeguards": [
+    "Future-price mutation invariance test",
+    "One-trading-day execution lag",
+    "Self-financing weight drift between rebalances",
+    "Turnover measured against drifted pre-trade weights",
+    "Purged partition label boundaries",
+    "Strict matured-label expanding walk-forward training",
+    "True calendar month-end signals",
+    "Backward-only point-in-time macro joins",
+    "Trailing-history-only regime thresholds and covariance",
+    "Exclusive holdout as-of market-data cutoff"
+  ],
+  "data_publication_policy": [
+    "The API and web export expose derived research summaries only.",
+    "Raw Yahoo OHLCV is never exposed by the API or web export.",
+    "Public repositories should exclude data/raw/*.parquet and data/holdout2026/raw/*.parquet.",
+    "After viewing these 2026 results, changing features, model hyperparameters, portfolio rules, or optimizer settings because of 2026 performance would contaminate this holdout. Future methodology changes require a new prospective period."
+  ],
+  "features": [
+    "amihud_21d",
+    "dollar_volume_median_21d",
+    "log_dollar_volume",
+    "momentum_126d",
+    "momentum_12_1",
+    "momentum_21d",
+    "momentum_252d",
+    "momentum_63d",
+    "momentum_6_1",
+    "volatility_21d",
+    "volatility_63d"
+  ],
+  "frozen_research_rules": [
+    "Do not change features, model hyperparameters, portfolio rules, optimizer settings, or regime definitions because of 2026 results.",
+    "Monthly refitting is allowed only under the predeclared expanding matured-label rule.",
+    "Only fully matured 2026 labels are eligible for Rank IC.",
+    "Future data extend the prospective record and do not trigger retrospective tuning."
+  ],
+  "provenance": {
+    "artifact_sha256": {
+      "milestone1/audit/data_quality_summary.json": "3e4d2fec54ef1ec7ad1a2e29d804c375bda86294769ab78825b61c8e1f801bae",
+      "milestone2b/summary.json": "389295d535d14efb0951a9a7b3c820088607b27268196bde7f10908a4f39f83a",
+      "milestone2c/summary.json": "6f3220bfa4197246181412396e65452910389c083eb7f1f133e0561c536d1b24",
+      "milestone3b/summary.json": "cc269478dee962a4c5494ed3ba4a666dd4febde79f97b7fc93457aab20153ad9",
+      "milestone3c/summary.json": "2f2975893adf17e77f1d9f9e424370728f5f50c16b789f9df02013a8eea5e751",
+      "milestone3d/summary.json": "2e90e35d553cbd652666db193a60bc000a53faaaab078399ba3b919e67650932"
+    },
+    "artifacts": [
+      "milestone1/audit/data_quality_summary.json",
+      "milestone2b/summary.json",
+      "milestone2c/summary.json",
+      "milestone3b/summary.json",
+      "milestone3c/summary.json",
+      "milestone3d/summary.json"
+    ],
+    "methodology_freeze_date": "2026-09-01"
+  },
+  "purged_splits": [
+    {
+      "end": "2019-11-29",
+      "name": "train",
+      "purged_rows_removed": 1260,
+      "rows": 117142,
+      "start": "2012-01-03"
+    },
+    {
+      "end": "2022-11-30",
+      "name": "validation",
+      "purged_rows_removed": 1260,
+      "rows": 44100,
+      "start": "2020-01-02"
+    },
+    {
+      "end": "2025-12-01",
+      "name": "historical_evaluation",
+      "purged_rows_removed": 1260,
+      "rows": 43860,
+      "start": "2023-01-03"
+    }
+  ],
+  "research_question": "Do validation-selected nonlinear tree models add more persistent cross-sectional ranking and portfolio value than the frozen Ridge and conventional baselines?",
+  "schema_version": "1.0.0",
+  "target": {
+    "definition": "P(t+21) / P(t) - 1",
+    "maturity_rule": "label_end_date must be strictly before the signal date",
+    "model_transform": "Centered cross-sectional percentile rank",
+    "name": "forward_return_21d"
+  },
+  "universe": {
+    "asset_class": "Liquid US equities",
+    "historical_end": "2025-12-31",
+    "historical_start": "2012-01-03",
+    "membership": "Static prototype universe",
+    "survivorship_bias": true,
+    "tickers": 60
+  }
+}

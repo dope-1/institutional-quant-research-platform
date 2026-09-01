@@ -1,0 +1,287 @@
+{
+  "holdout_freeze_confirmation": {
+    "matches_milestone3d": {
+      "nonlinear_models": {
+        "lightgbm": {
+          "candidate": "lgb_shallow",
+          "feature_group": "all_features",
+          "params": {
+            "colsample_bytree": 0.8,
+            "learning_rate": 0.03,
+            "min_child_samples": 75,
+            "n_estimators": 300,
+            "num_leaves": 7,
+            "reg_alpha": 0.0,
+            "reg_lambda": 10.0,
+            "subsample": 0.8
+          },
+          "portfolio_variant": {
+            "exit_fraction": 0.3,
+            "kind": "buffered_top",
+            "name": "top20_buffered",
+            "top_fraction": 0.2
+          },
+          "rank_features": [
+            "rank__momentum_21d",
+            "rank__momentum_63d",
+            "rank__momentum_126d",
+            "rank__momentum_252d",
+            "rank__momentum_6_1",
+            "rank__momentum_12_1",
+            "rank__volatility_21d",
+            "rank__volatility_63d",
+            "rank__log_dollar_volume",
+            "rank__dollar_volume_median_21d",
+            "rank__amihud_21d"
+          ]
+        },
+        "random_forest": {
+          "candidate": "rf_shallow",
+          "feature_group": "all_features",
+          "params": {
+            "max_depth": 3,
+            "max_features": 0.75,
+            "min_samples_leaf": 40,
+            "n_estimators": 400
+          },
+          "portfolio_variant": {
+            "kind": "rank_weighted_top",
+            "name": "top20_rank_weighted",
+            "top_fraction": 0.2
+          },
+          "rank_features": [
+            "rank__momentum_21d",
+            "rank__momentum_63d",
+            "rank__momentum_126d",
+            "rank__momentum_252d",
+            "rank__momentum_6_1",
+            "rank__momentum_12_1",
+            "rank__volatility_21d",
+            "rank__volatility_63d",
+            "rank__log_dollar_volume",
+            "rank__dollar_volume_median_21d",
+            "rank__amihud_21d"
+          ]
+        },
+        "xgboost": {
+          "candidate": "xgb_conservative",
+          "feature_group": "all_features",
+          "params": {
+            "colsample_bytree": 0.8,
+            "learning_rate": 0.03,
+            "max_depth": 2,
+            "min_child_weight": 40.0,
+            "n_estimators": 300,
+            "reg_alpha": 0.0,
+            "reg_lambda": 20.0,
+            "subsample": 0.8
+          },
+          "portfolio_variant": {
+            "exit_fraction": 0.3,
+            "kind": "buffered_top",
+            "name": "top20_buffered",
+            "top_fraction": 0.2
+          },
+          "rank_features": [
+            "rank__momentum_21d",
+            "rank__momentum_63d",
+            "rank__momentum_126d",
+            "rank__momentum_252d",
+            "rank__momentum_6_1",
+            "rank__momentum_12_1",
+            "rank__volatility_21d",
+            "rank__volatility_63d",
+            "rank__log_dollar_volume",
+            "rank__dollar_volume_median_21d",
+            "rank__amihud_21d"
+          ]
+        }
+      },
+      "optimizer_candidates": {
+        "lightgbm": {
+          "name": "low_turnover",
+          "risk_aversion": 4.0,
+          "turnover_cap": 0.4,
+          "turnover_penalty": 0.06
+        },
+        "random_forest": {
+          "name": "conservative",
+          "risk_aversion": 8.0,
+          "turnover_cap": 0.5,
+          "turnover_penalty": 0.04
+        },
+        "ridge": {
+          "name": "conservative",
+          "risk_aversion": 8.0,
+          "turnover_cap": 0.5,
+          "turnover_penalty": 0.04
+        },
+        "xgboost": {
+          "name": "conservative",
+          "risk_aversion": 8.0,
+          "turnover_cap": 0.5,
+          "turnover_penalty": 0.04
+        }
+      },
+      "primary_optimizer_alpha_model": "ridge",
+      "ridge": {
+        "alpha": 10.0,
+        "portfolio_variant": {
+          "kind": "equal_weight_top",
+          "name": "top10_equal",
+          "top_fraction": 0.1
+        },
+        "rank_features": [
+          "rank__momentum_21d",
+          "rank__momentum_63d",
+          "rank__momentum_126d",
+          "rank__momentum_252d",
+          "rank__momentum_6_1",
+          "rank__momentum_12_1"
+        ]
+      }
+    },
+    "retuned_on_2026": false
+  },
+  "models": [
+    {
+      "family": "linear_ml",
+      "feature_group": "momentum_only",
+      "hyperparameters": {
+        "alpha": 10.0
+      },
+      "id": "ridge",
+      "portfolio_variant": {
+        "kind": "equal_weight_top",
+        "name": "top10_equal",
+        "top_fraction": 0.1
+      },
+      "rank_features": [
+        "rank__momentum_21d",
+        "rank__momentum_63d",
+        "rank__momentum_126d",
+        "rank__momentum_252d",
+        "rank__momentum_6_1",
+        "rank__momentum_12_1"
+      ]
+    },
+    {
+      "candidate": "lgb_shallow",
+      "family": "nonlinear_ml",
+      "feature_group": "all_features",
+      "hyperparameters": {
+        "colsample_bytree": 0.8,
+        "learning_rate": 0.03,
+        "min_child_samples": 75,
+        "n_estimators": 300,
+        "num_leaves": 7,
+        "reg_alpha": 0.0,
+        "reg_lambda": 10.0,
+        "subsample": 0.8
+      },
+      "id": "lightgbm",
+      "portfolio_variant": {
+        "exit_fraction": 0.3,
+        "kind": "buffered_top",
+        "name": "top20_buffered",
+        "top_fraction": 0.2
+      },
+      "rank_features": [
+        "rank__momentum_21d",
+        "rank__momentum_63d",
+        "rank__momentum_126d",
+        "rank__momentum_252d",
+        "rank__momentum_6_1",
+        "rank__momentum_12_1",
+        "rank__volatility_21d",
+        "rank__volatility_63d",
+        "rank__log_dollar_volume",
+        "rank__dollar_volume_median_21d",
+        "rank__amihud_21d"
+      ]
+    },
+    {
+      "candidate": "rf_shallow",
+      "family": "nonlinear_ml",
+      "feature_group": "all_features",
+      "hyperparameters": {
+        "max_depth": 3,
+        "max_features": 0.75,
+        "min_samples_leaf": 40,
+        "n_estimators": 400
+      },
+      "id": "random_forest",
+      "portfolio_variant": {
+        "kind": "rank_weighted_top",
+        "name": "top20_rank_weighted",
+        "top_fraction": 0.2
+      },
+      "rank_features": [
+        "rank__momentum_21d",
+        "rank__momentum_63d",
+        "rank__momentum_126d",
+        "rank__momentum_252d",
+        "rank__momentum_6_1",
+        "rank__momentum_12_1",
+        "rank__volatility_21d",
+        "rank__volatility_63d",
+        "rank__log_dollar_volume",
+        "rank__dollar_volume_median_21d",
+        "rank__amihud_21d"
+      ]
+    },
+    {
+      "candidate": "xgb_conservative",
+      "family": "nonlinear_ml",
+      "feature_group": "all_features",
+      "hyperparameters": {
+        "colsample_bytree": 0.8,
+        "learning_rate": 0.03,
+        "max_depth": 2,
+        "min_child_weight": 40.0,
+        "n_estimators": 300,
+        "reg_alpha": 0.0,
+        "reg_lambda": 20.0,
+        "subsample": 0.8
+      },
+      "id": "xgboost",
+      "portfolio_variant": {
+        "exit_fraction": 0.3,
+        "kind": "buffered_top",
+        "name": "top20_buffered",
+        "top_fraction": 0.2
+      },
+      "rank_features": [
+        "rank__momentum_21d",
+        "rank__momentum_63d",
+        "rank__momentum_126d",
+        "rank__momentum_252d",
+        "rank__momentum_6_1",
+        "rank__momentum_12_1",
+        "rank__volatility_21d",
+        "rank__volatility_63d",
+        "rank__log_dollar_volume",
+        "rank__dollar_volume_median_21d",
+        "rank__amihud_21d"
+      ]
+    }
+  ],
+  "provenance": {
+    "artifact_sha256": {
+      "milestone2b/summary.json": "389295d535d14efb0951a9a7b3c820088607b27268196bde7f10908a4f39f83a",
+      "milestone2c/summary.json": "6f3220bfa4197246181412396e65452910389c083eb7f1f133e0561c536d1b24",
+      "milestone3d/frozen_specifications.json": "dfea292a3cec8e7b30b9749ede36577e5cc411b0f5d2b442c5000433b925fc41"
+    },
+    "artifacts": [
+      "milestone2b/summary.json",
+      "milestone2c/summary.json",
+      "milestone3d/frozen_specifications.json"
+    ],
+    "methodology_freeze_date": "2026-09-01"
+  },
+  "schema_version": "1.0.0",
+  "selection_policy": [
+    "Feature group and Ridge alpha selected only by validation mean Rank IC; portfolio variant selected only by validation Sharpe with lower turnover as tie-breaker. The test period is evaluated only after those choices are frozen.",
+    "For each nonlinear model family, feature group and hyperparameters are selected only by 2020-2022 validation mean Rank IC. Portfolio implementation is then selected only by validation Sharpe with lower turnover as tie-breaker. These choices are frozen before evaluating 2023-2025."
+  ]
+}

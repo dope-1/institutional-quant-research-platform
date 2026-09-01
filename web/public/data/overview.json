@@ -1,0 +1,88 @@
+{
+  "data_quality": {
+    "audit_pass": true,
+    "dates_with_all_missing_macro_observations": 0,
+    "duplicate_date_ticker_rows": 0,
+    "end_date": "2025-12-31",
+    "extreme_abs_daily_return_rows": 11,
+    "extreme_abs_daily_return_threshold": 0.25,
+    "feature_count": 19,
+    "label_alignment_mismatches": 0,
+    "median_assets_per_date": 59.0,
+    "median_complete_feature_fraction": 1.0,
+    "minimum_assets_per_date": 56,
+    "minimum_complete_feature_rows_per_date": 0,
+    "minimum_ticker_within_span_coverage_ratio": 1.0,
+    "nonfinite_feature_values": 0,
+    "notes": [
+      "Extreme-return and zero-volume rows are review flags, not automatic data errors.",
+      "Macro values are carried backward-only from the last available observation; future filling is never used.",
+      "Static-universe survivorship bias remains a known Milestone 1 limitation.",
+      "Feature warm-up missingness is expected for long lookback features such as 12-1 momentum."
+    ],
+    "rows": 208882,
+    "start_date": "2012-01-03",
+    "tickers": 60,
+    "zero_or_negative_volume_rows": 1
+  },
+  "disclosures": [
+    "The 2023-2025 evaluation period was already inspected in Milestones 2A and 2B. Milestone 2C does not tune on it, but it is therefore a frozen historical evaluation period rather than a pristine never-seen holdout.",
+    "The 2023-2025 period has been inspected in earlier milestones and remains a frozen historical evaluation period rather than a pristine holdout.",
+    "After viewing these 2026 results, changing features, model hyperparameters, portfolio rules, or optimizer settings because of 2026 performance would contaminate this holdout. Future methodology changes require a new prospective period.",
+    "The static equity universe is survivorship-biased and is not point-in-time index membership."
+  ],
+  "evaluation_periods": [
+    {
+      "end": "2025-12-31",
+      "id": "historical_baseline",
+      "label": "Historical baseline research",
+      "start": "2012-01-03",
+      "status": "historical"
+    },
+    {
+      "end": "2025-12-31",
+      "id": "historical_evaluation",
+      "label": "Already-inspected historical evaluation",
+      "start": "2023-01-03",
+      "status": "already_inspected"
+    },
+    {
+      "end": "2026-08-31",
+      "id": "prospective_holdout",
+      "label": "Genuine prospective holdout",
+      "start": "2026-01-01",
+      "status": "GENUINE_HOLDOUT_PARTIAL_YEAR"
+    }
+  ],
+  "key_findings": [
+    "Momentum remains a strong conventional benchmark.",
+    "Random Forest had the most persistent positive historical nonlinear Rank IC, but its confidence interval included zero.",
+    "Turnover-aware optimization improved Random Forest historical risk-adjusted efficiency and implementability.",
+    "All learned models produced negative mean Rank IC in the first seven matured 2026 holdout months.",
+    "The early prospective result is negative evidence, not a final statistical verdict."
+  ],
+  "project": {
+    "latest_market_date": "2026-08-31",
+    "latest_milestone": "4A",
+    "methodology_freeze_date": "2026-09-01",
+    "name": "institutional-quant-research-platform",
+    "research_status": "FROZEN",
+    "universe_size": 60
+  },
+  "provenance": {
+    "artifact_sha256": {
+      "milestone1/audit/data_quality_summary.json": "3e4d2fec54ef1ec7ad1a2e29d804c375bda86294769ab78825b61c8e1f801bae",
+      "milestone2c/summary.json": "6f3220bfa4197246181412396e65452910389c083eb7f1f133e0561c536d1b24",
+      "milestone3c/summary.json": "2f2975893adf17e77f1d9f9e424370728f5f50c16b789f9df02013a8eea5e751",
+      "milestone3d/summary.json": "2e90e35d553cbd652666db193a60bc000a53faaaab078399ba3b919e67650932"
+    },
+    "artifacts": [
+      "milestone1/audit/data_quality_summary.json",
+      "milestone2c/summary.json",
+      "milestone3c/summary.json",
+      "milestone3d/summary.json"
+    ],
+    "methodology_freeze_date": "2026-09-01"
+  },
+  "schema_version": "1.0.0"
+}

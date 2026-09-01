@@ -1,0 +1,12 @@
+feature,importance,normalized_importance,pretest_training_rows
+rank__momentum_63d,224.0,0.12444444444444444,6970
+rank__momentum_21d,207.0,0.115,6970
+rank__volatility_63d,183.0,0.10166666666666667,6970
+rank__dollar_volume_median_21d,177.0,0.09833333333333333,6970
+rank__momentum_126d,158.0,0.08777777777777777,6970
+rank__amihud_21d,158.0,0.08777777777777777,6970
+rank__momentum_6_1,157.0,0.08722222222222223,6970
+rank__volatility_21d,145.0,0.08055555555555556,6970
+rank__momentum_252d,137.0,0.07611111111111112,6970
+rank__log_dollar_volume,135.0,0.075,6970
+rank__momentum_12_1,119.0,0.0661111111111111,6970

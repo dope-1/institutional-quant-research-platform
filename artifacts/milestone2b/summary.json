@@ -1,0 +1,112 @@
+{
+  "milestone": "2B",
+  "selection_policy": "Feature group and Ridge alpha selected only by validation mean Rank IC; portfolio variant selected only by validation Sharpe with lower turnover as tie-breaker. The test period is evaluated only after those choices are frozen.",
+  "selected_feature_group": "momentum_only",
+  "selected_rank_features": [
+    "rank__momentum_21d",
+    "rank__momentum_63d",
+    "rank__momentum_126d",
+    "rank__momentum_252d",
+    "rank__momentum_6_1",
+    "rank__momentum_12_1"
+  ],
+  "selected_alpha": 10.0,
+  "selected_portfolio_variant": {
+    "name": "top10_equal",
+    "kind": "equal_weight_top",
+    "top_fraction": 0.1
+  },
+  "validation_selection": {
+    "feature_ablation_leader": {
+      "feature_group": "momentum_only",
+      "n_features": 6,
+      "selected_alpha": 10.0,
+      "validation_mean_rank_ic": 0.024032400899538325,
+      "validation_median_rank_ic": 0.03534315087524313,
+      "validation_rank_ic_ir": 0.30698367080520145,
+      "validation_positive_rank_ic_fraction": 0.5714285714285714,
+      "validation_months": 35
+    },
+    "portfolio_leader": {
+      "variant": "top10_equal",
+      "kind": "equal_weight_top",
+      "total_return": 0.8062348733559348,
+      "annualized_return": 0.22472018732309995,
+      "annualized_volatility": 0.31931973180858886,
+      "sharpe": 0.7951687803349686,
+      "sortino": 1.0085597805631212,
+      "max_drawdown": -0.41007534185099703,
+      "var_95_daily": 0.030446943791688847,
+      "cvar_95_daily": 0.04759736006571769,
+      "annualized_turnover": 18.906816580683483
+    }
+  },
+  "test_statistical_robustness": {
+    "rank_ic": {
+      "mean_rank_ic": -0.03609256539514946,
+      "median_rank_ic": -0.03484301194776327,
+      "rank_ic_std": 0.22857709881515323,
+      "rank_ic_ir": -0.5469853048616683,
+      "positive_rank_ic_fraction": 0.45714285714285713,
+      "months": 35.0,
+      "t_stat": -0.9341552481034862,
+      "bootstrap_ci_low": -0.1132833326717739,
+      "bootstrap_ci_high": 0.03795506688365818,
+      "confidence": 0.95
+    },
+    "top_bottom_spread": {
+      "mean": 0.005062809657855106,
+      "median": 0.008479680579964441,
+      "positive_fraction": 0.5142857142857142,
+      "months": 35,
+      "t_stat": 0.41548936812401555,
+      "bootstrap_ci_low": -0.01761537823844042,
+      "bootstrap_ci_high": 0.030266703505063036,
+      "confidence": 0.95
+    }
+  },
+  "test_portfolio_metrics": {
+    "equal_weight": {
+      "total_return": 0.8579394072468418,
+      "annualized_return": 0.23770577574129748,
+      "annualized_volatility": 0.1423756736777674,
+      "sharpe": 1.5693572599487062,
+      "sortino": 2.145368194336071,
+      "max_drawdown": -0.17575065266612155,
+      "var_95_daily": 0.013343970427095758,
+      "cvar_95_daily": 0.01925224246195018,
+      "annualized_turnover": 0.9276149811912999
+    },
+    "momentum_top_quintile": {
+      "total_return": 1.25335748359797,
+      "annualized_return": 0.32271445159359335,
+      "annualized_volatility": 0.21976841761157026,
+      "sharpe": 1.3829508786606863,
+      "sortino": 1.958459119634333,
+      "max_drawdown": -0.24594832618219375,
+      "var_95_daily": 0.02084064713891702,
+      "cvar_95_daily": 0.03111638454354554,
+      "annualized_turnover": 6.7882020551627145,
+      "information_ratio": 0.5962202249456818
+    },
+    "ridge_top10_equal": {
+      "total_return": 1.3518380874242575,
+      "annualized_return": 0.3423370291062473,
+      "annualized_volatility": 0.24364031304082093,
+      "sharpe": 1.3304737250166625,
+      "sortino": 1.8281072063626258,
+      "max_drawdown": -0.2877927517331821,
+      "var_95_daily": 0.023751279795320098,
+      "cvar_95_daily": 0.03452669790079927,
+      "annualized_turnover": 19.604836054506922,
+      "information_ratio": 0.6143866050267378
+    }
+  },
+  "test_signal_months": 35,
+  "methodology": {
+    "ablation": "validation-only feature-family comparison with per-family validation alpha tuning",
+    "coefficient_stability": "same matured-label expanding Ridge fits used at each prediction month",
+    "portfolio_selection": "validation-only among predeclared long-only variants",
+    "bootstrap": "non-parametric resampling of monthly Rank IC and top-minus-bottom spread"
+  }
+}

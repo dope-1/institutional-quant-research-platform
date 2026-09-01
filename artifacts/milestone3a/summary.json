@@ -1,0 +1,325 @@
+{
+  "milestone": "3A",
+  "research_question": "What feature structure and interactions drive the validation-selected nonlinear models, and are those explanations stable across the historical evaluation years?",
+  "policy": "Milestone 3A is post-hoc explanation only. It does not select features, hyperparameters, portfolio variants, or alter the frozen Milestone 2C models.",
+  "reference_model_disclosure": "SHAP and permutation diagnostics use one pre-test reference model per selected family, fitted only on labels matured before the first 2023 signal. These explanations characterize the frozen model specification; they are not substitutes for the expanding walk-forward performance results.",
+  "shap_dependency": "SHAP TreeExplainer; pyproject pins shap>=0.52,<0.53.",
+  "models": {
+    "random_forest": {
+      "pretest_training_rows": 6970,
+      "top_shap_features": [
+        {
+          "feature": "rank__dollar_volume_median_21d",
+          "normalized_mean_abs_shap": 0.3064639230887803
+        },
+        {
+          "feature": "rank__log_dollar_volume",
+          "normalized_mean_abs_shap": 0.16213730316925654
+        },
+        {
+          "feature": "rank__momentum_21d",
+          "normalized_mean_abs_shap": 0.12243333576825431
+        },
+        {
+          "feature": "rank__momentum_63d",
+          "normalized_mean_abs_shap": 0.08905699363860792
+        },
+        {
+          "feature": "rank__momentum_6_1",
+          "normalized_mean_abs_shap": 0.08753601064542736
+        }
+      ],
+      "top_permutation_features": [
+        {
+          "feature": "rank__log_dollar_volume",
+          "importance_mean": 0.011298595582529958
+        },
+        {
+          "feature": "rank__dollar_volume_median_21d",
+          "importance_mean": 0.010786669543436062
+        },
+        {
+          "feature": "rank__volatility_63d",
+          "importance_mean": 0.0076913050105738125
+        },
+        {
+          "feature": "rank__amihud_21d",
+          "importance_mean": 0.0019115854610147274
+        },
+        {
+          "feature": "rank__volatility_21d",
+          "importance_mean": 0.0016276366917051504
+        }
+      ],
+      "top_shap_interactions": [
+        {
+          "feature_a": "rank__momentum_21d",
+          "feature_b": "rank__dollar_volume_median_21d",
+          "mean_abs_interaction": 0.0011940501540930167
+        },
+        {
+          "feature_a": "rank__momentum_21d",
+          "feature_b": "rank__log_dollar_volume",
+          "mean_abs_interaction": 0.0005146767407582483
+        },
+        {
+          "feature_a": "rank__momentum_63d",
+          "feature_b": "rank__dollar_volume_median_21d",
+          "mean_abs_interaction": 0.0004975056343073436
+        },
+        {
+          "feature_a": "rank__volatility_63d",
+          "feature_b": "rank__dollar_volume_median_21d",
+          "mean_abs_interaction": 0.0003672825953055374
+        },
+        {
+          "feature_a": "rank__momentum_63d",
+          "feature_b": "rank__log_dollar_volume",
+          "mean_abs_interaction": 0.00034766872896307456
+        }
+      ]
+    },
+    "xgboost": {
+      "pretest_training_rows": 6970,
+      "top_shap_features": [
+        {
+          "feature": "rank__dollar_volume_median_21d",
+          "normalized_mean_abs_shap": 0.21502236787545959
+        },
+        {
+          "feature": "rank__momentum_21d",
+          "normalized_mean_abs_shap": 0.1550679904144369
+        },
+        {
+          "feature": "rank__momentum_63d",
+          "normalized_mean_abs_shap": 0.13475356939446598
+        },
+        {
+          "feature": "rank__log_dollar_volume",
+          "normalized_mean_abs_shap": 0.11174722541005762
+        },
+        {
+          "feature": "rank__volatility_63d",
+          "normalized_mean_abs_shap": 0.08036921980274107
+        }
+      ],
+      "top_permutation_features": [
+        {
+          "feature": "rank__volatility_63d",
+          "importance_mean": 0.017787615547345138
+        },
+        {
+          "feature": "rank__dollar_volume_median_21d",
+          "importance_mean": 0.013845561886048505
+        },
+        {
+          "feature": "rank__momentum_63d",
+          "importance_mean": 0.004927809741626081
+        },
+        {
+          "feature": "rank__log_dollar_volume",
+          "importance_mean": 0.003236109721700883
+        },
+        {
+          "feature": "rank__momentum_12_1",
+          "importance_mean": 0.0009598273054915136
+        }
+      ],
+      "top_shap_interactions": [
+        {
+          "feature_a": "rank__momentum_21d",
+          "feature_b": "rank__dollar_volume_median_21d",
+          "mean_abs_interaction": 0.0014804169789992252
+        },
+        {
+          "feature_a": "rank__volatility_63d",
+          "feature_b": "rank__dollar_volume_median_21d",
+          "mean_abs_interaction": 0.0008166421252826695
+        },
+        {
+          "feature_a": "rank__momentum_21d",
+          "feature_b": "rank__momentum_63d",
+          "mean_abs_interaction": 0.0007651463647744094
+        },
+        {
+          "feature_a": "rank__momentum_63d",
+          "feature_b": "rank__volatility_63d",
+          "mean_abs_interaction": 0.0006333221399654576
+        },
+        {
+          "feature_a": "rank__momentum_63d",
+          "feature_b": "rank__momentum_6_1",
+          "mean_abs_interaction": 0.0005682438101393927
+        }
+      ]
+    },
+    "lightgbm": {
+      "pretest_training_rows": 6970,
+      "top_shap_features": [
+        {
+          "feature": "rank__dollar_volume_median_21d",
+          "normalized_mean_abs_shap": 0.18577686550703554
+        },
+        {
+          "feature": "rank__momentum_63d",
+          "normalized_mean_abs_shap": 0.13801864947335427
+        },
+        {
+          "feature": "rank__momentum_21d",
+          "normalized_mean_abs_shap": 0.13137541212539755
+        },
+        {
+          "feature": "rank__log_dollar_volume",
+          "normalized_mean_abs_shap": 0.09032224959508832
+        },
+        {
+          "feature": "rank__amihud_21d",
+          "normalized_mean_abs_shap": 0.0817891450452535
+        }
+      ],
+      "top_permutation_features": [
+        {
+          "feature": "rank__momentum_63d",
+          "importance_mean": 0.009305928555428233
+        },
+        {
+          "feature": "rank__volatility_63d",
+          "importance_mean": 0.00900096099124021
+        },
+        {
+          "feature": "rank__momentum_12_1",
+          "importance_mean": 0.007951998846490681
+        },
+        {
+          "feature": "rank__log_dollar_volume",
+          "importance_mean": 0.003833204062787142
+        },
+        {
+          "feature": "rank__momentum_252d",
+          "importance_mean": 0.003261224324040539
+        }
+      ],
+      "top_shap_interactions": [
+        {
+          "feature_a": "rank__log_dollar_volume",
+          "feature_b": "rank__dollar_volume_median_21d",
+          "mean_abs_interaction": 0.00171583881527371
+        },
+        {
+          "feature_a": "rank__momentum_63d",
+          "feature_b": "rank__momentum_6_1",
+          "mean_abs_interaction": 0.001502095580387464
+        },
+        {
+          "feature_a": "rank__momentum_63d",
+          "feature_b": "rank__volatility_63d",
+          "mean_abs_interaction": 0.00142300296565022
+        },
+        {
+          "feature_a": "rank__momentum_21d",
+          "feature_b": "rank__dollar_volume_median_21d",
+          "mean_abs_interaction": 0.0013825941076727095
+        },
+        {
+          "feature_a": "rank__volatility_63d",
+          "feature_b": "rank__dollar_volume_median_21d",
+          "mean_abs_interaction": 0.0013595951316339482
+        }
+      ]
+    }
+  },
+  "reference_model_rank_ic": [
+    {
+      "model": "random_forest",
+      "mean_rank_ic": 0.009788433294962897,
+      "median_rank_ic": 0.0028341205890525154,
+      "rank_ic_std": 0.15511769379879303,
+      "rank_ic_ir": 0.21859613017927026,
+      "positive_rank_ic_fraction": 0.5142857142857142,
+      "months": 35.0
+    },
+    {
+      "model": "xgboost",
+      "mean_rank_ic": -0.014637399277577108,
+      "median_rank_ic": -0.02834120589052515,
+      "rank_ic_std": 0.1580568670016195,
+      "rank_ic_ir": -0.32080503328179666,
+      "positive_rank_ic_fraction": 0.45714285714285713,
+      "months": 35.0
+    },
+    {
+      "model": "lightgbm",
+      "mean_rank_ic": -0.023655777398483707,
+      "median_rank_ic": 0.0030564045568213394,
+      "rank_ic_std": 0.1504940233169227,
+      "rank_ic_ir": -0.5445134290871999,
+      "positive_rank_ic_fraction": 0.5142857142857142,
+      "months": 35.0
+    }
+  ],
+  "interaction_diagnostics": [
+    {
+      "model": "random_forest",
+      "feature_x": "rank__momentum_63d",
+      "feature_y": "rank__dollar_volume_median_21d",
+      "grid_csv": "interactions\\random_forest_momentum_63d_x_dollar_volume_median_21d.csv",
+      "plot": "interactions\\random_forest_dependence_momentum_63d_x_dollar_volume_median_21d.png"
+    },
+    {
+      "model": "random_forest",
+      "feature_x": "rank__momentum_63d",
+      "feature_y": "rank__volatility_63d",
+      "grid_csv": "interactions\\random_forest_momentum_63d_x_volatility_63d.csv",
+      "plot": "interactions\\random_forest_dependence_momentum_63d_x_volatility_63d.png"
+    },
+    {
+      "model": "random_forest",
+      "feature_x": "rank__momentum_126d",
+      "feature_y": "rank__log_dollar_volume",
+      "grid_csv": "interactions\\random_forest_momentum_126d_x_log_dollar_volume.csv",
+      "plot": "interactions\\random_forest_dependence_momentum_126d_x_log_dollar_volume.png"
+    },
+    {
+      "model": "xgboost",
+      "feature_x": "rank__momentum_63d",
+      "feature_y": "rank__dollar_volume_median_21d",
+      "grid_csv": "interactions\\xgboost_momentum_63d_x_dollar_volume_median_21d.csv",
+      "plot": "interactions\\xgboost_dependence_momentum_63d_x_dollar_volume_median_21d.png"
+    },
+    {
+      "model": "xgboost",
+      "feature_x": "rank__momentum_63d",
+      "feature_y": "rank__volatility_63d",
+      "grid_csv": "interactions\\xgboost_momentum_63d_x_volatility_63d.csv",
+      "plot": "interactions\\xgboost_dependence_momentum_63d_x_volatility_63d.png"
+    },
+    {
+      "model": "xgboost",
+      "feature_x": "rank__momentum_126d",
+      "feature_y": "rank__log_dollar_volume",
+      "grid_csv": "interactions\\xgboost_momentum_126d_x_log_dollar_volume.csv",
+      "plot": "interactions\\xgboost_dependence_momentum_126d_x_log_dollar_volume.png"
+    },
+    {
+      "model": "lightgbm",
+      "feature_x": "rank__momentum_63d",
+      "feature_y": "rank__dollar_volume_median_21d",
+      "grid_csv": "interactions\\lightgbm_momentum_63d_x_dollar_volume_median_21d.csv",
+      "plot": "interactions\\lightgbm_dependence_momentum_63d_x_dollar_volume_median_21d.png"
+    },
+    {
+      "model": "lightgbm",
+      "feature_x": "rank__momentum_63d",
+      "feature_y": "rank__volatility_63d",
+      "grid_csv": "interactions\\lightgbm_momentum_63d_x_volatility_63d.csv",
+      "plot": "interactions\\lightgbm_dependence_momentum_63d_x_volatility_63d.png"
+    },
+    {
+      "model": "lightgbm",
+      "feature_x": "rank__momentum_126d",
+      "feature_y": "rank__log_dollar_volume",
+      "grid_csv": "interactions\\lightgbm_momentum_126d_x_log_dollar_volume.csv",
+      "plot": "interactions\\lightgbm_dependence_momentum_126d_x_log_dollar_volume.png"
+    }
+  ]
+}

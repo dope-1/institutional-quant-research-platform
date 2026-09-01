@@ -1,0 +1,17 @@
+regime_dimension,regime,signal_months
+vix_regime,low,17
+vix_regime,medium,11
+vix_regime,high,7
+treasury_10y_regime,high,22
+treasury_10y_regime,medium,8
+treasury_10y_regime,low,5
+fed_funds_regime,high,20
+fed_funds_regime,low,15
+rate_direction,rising,17
+rate_direction,falling,13
+rate_direction,flat,5
+yield_curve_regime,inverted,19
+yield_curve_regime,normal,11
+yield_curve_regime,flat,5
+market_trend_regime,positive,27
+market_trend_regime,negative,8

@@ -1,0 +1,10 @@
+export { default as overview } from "@/public/data/overview.json";
+export { default as strategies } from "@/public/data/strategies.json";
+export { default as performance } from "@/public/data/performance.json";
+export { default as rankIc } from "@/public/data/rank_ic.json";
+export { default as models } from "@/public/data/models.json";
+export { default as shap } from "@/public/data/shap.json";
+export { default as regimes } from "@/public/data/regimes.json";
+export { default as optimization } from "@/public/data/optimization.json";
+export { default as holdout } from "@/public/data/holdout.json";
+export { default as methodology } from "@/public/data/methodology.json";
