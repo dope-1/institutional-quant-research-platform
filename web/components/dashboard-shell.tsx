@@ -30,6 +30,7 @@ import {
   SidebarMenuItem,
   SidebarRail,
   SidebarTrigger,
+  useSidebar,
 } from "@/components/ui/sidebar";
 
 const nav = [
@@ -47,11 +48,12 @@ const nav = [
 
 export function DashboardShell({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const { setOpenMobile } = useSidebar();
   return (
     <>
       <Sidebar collapsible="icon">
         <SidebarHeader className="border-b border-sidebar-border p-4">
-          <Link href="/" className="flex items-center gap-3">
+          <Link href="/" className="flex items-center gap-3" onClick={() => setOpenMobile(false)}>
             <div className="grid size-9 shrink-0 place-items-center rounded-lg border border-cyan-400/30 bg-cyan-400/10 font-mono text-sm font-semibold text-cyan-300">IQ</div>
             <div className="min-w-0 group-data-[collapsible=icon]:hidden">
               <p className="truncate text-sm font-semibold tracking-tight text-white">Quant Research</p>
@@ -67,7 +69,10 @@ export function DashboardShell({ children }: { children: React.ReactNode }) {
                 {nav.map(([href, title, Icon]) => (
                   <SidebarMenuItem key={href}>
                     <SidebarMenuButton asChild isActive={pathname === href} tooltip={title}>
-                      <Link href={href}><Icon /><span>{title}</span></Link>
+                      <Link href={href} onClick={() => setOpenMobile(false)}>
+                        <Icon />
+                        <span>{title}</span>
+                      </Link>
                     </SidebarMenuButton>
                   </SidebarMenuItem>
                 ))}
