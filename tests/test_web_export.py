@@ -32,6 +32,22 @@ def test_export_web_writes_exact_stable_public_dataset(tmp_path: Path) -> None:
         assert payload["schema_version"] == "1.0.0"
         assert payload["provenance"]["methodology_freeze_date"] == "2026-09-01"
 
+def test_provenance_hashes_are_stable_across_text_line_endings(tmp_path: Path) -> None:
+    repository = ArtifactRepository(tmp_path)
+
+    for filename, lf_content in (
+        ("artifact.csv", b"value\n1\n"),
+        ("artifact.json", b'{"value": 1}\n'),
+    ):
+        path = tmp_path / filename
+
+        path.write_bytes(lf_content.replace(b"\n", b"\r\n"))
+        windows_hash = repository._provenance([filename]).artifact_sha256[filename]
+
+        path.write_bytes(lf_content)
+        linux_hash = repository._provenance([filename]).artifact_sha256[filename]
+
+        assert windows_hash == linux_hash
 
 def test_holdout_export_preserves_negative_prospective_rank_ic(tmp_path: Path) -> None:
     ArtifactRepository(ROOT / "artifacts").export_all(tmp_path)

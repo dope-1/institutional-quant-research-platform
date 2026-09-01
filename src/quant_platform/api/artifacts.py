@@ -311,7 +311,10 @@ class ArtifactRepository:
             path = self._path(relative)
             if not path.is_file():
                 raise ArtifactValidationError(f"Required artifact is missing: {relative}")
-            digest = hashlib.sha256(path.read_bytes()).hexdigest()
+            content = path.read_bytes()
+            if path.suffix.lower() in {".csv", ".json"}:
+             content = content.replace(b"\r\n", b"\n")
+            digest = hashlib.sha256(content).hexdigest()
             hashes[relative] = digest
         return Provenance(
             methodology_freeze_date=FREEZE_DATE,

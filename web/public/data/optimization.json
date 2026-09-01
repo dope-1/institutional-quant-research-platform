@@ -2777,10 +2777,10 @@
   "objective": "maximize alpha'w - risk_aversion*w'Sigma*w - turnover_penalty*|w-w_prev|_1",
   "provenance": {
     "artifact_sha256": {
-      "milestone3c/optimizer_concentration_summary.csv": "d91328dfce061f29d5baeae28a1ff00d84a0141983fb6556f9b3d0fdd73a47da",
-      "milestone3c/optimizer_diagnostics.csv": "64cc86cf93c6b72ffd6abb0f464366897ee0894301206b709aa921e265d4467a",
-      "milestone3c/portfolio/performance_metrics.csv": "c0c118e47ba971cc0496d7aa9e133ee5be94545112be97e39c021ac278fabe0c",
-      "milestone3c/summary.json": "2f2975893adf17e77f1d9f9e424370728f5f50c16b789f9df02013a8eea5e751"
+      "milestone3c/optimizer_concentration_summary.csv": "4596eefd37c38628648e276cc309eecb9127141563f43d7129a74ab29bfa1473",
+      "milestone3c/optimizer_diagnostics.csv": "b0a44b96d233521fb55912310e3415a669c9206b1ef01ab2c07c88f660534da5",
+      "milestone3c/portfolio/performance_metrics.csv": "ed158a686f47ebaa18ad8d8917ca65a8be6811b2dee298b524003eb8c6a243ab",
+      "milestone3c/summary.json": "dbce9c1d425c23f187733779f7a68cd431ceefdcec16f76990ff68b7adf90478"
     },
     "artifacts": [
       "milestone3c/optimizer_concentration_summary.csv",

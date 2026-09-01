@@ -1555,10 +1555,10 @@
   "policy": "Milestone 3A is post-hoc explanation only. It does not select features, hyperparameters, portfolio variants, or alter the frozen Milestone 2C models.",
   "provenance": {
     "artifact_sha256": {
-      "milestone3a/shap_global_importance.csv": "80d0caba24c8ffa813f6e60e90a14a92ffda21290fb6ca7279bb990385c02f24",
-      "milestone3a/shap_importance_by_year.csv": "ef04e1a8d480919de1bf22aac7f6a23be8a91007f66d4399dd1533764a412512",
-      "milestone3a/shap_interaction_importance.csv": "0e569167501e0da31474041daf84f7508d618eab6e5f74e9c5412440573a12e3",
-      "milestone3a/summary.json": "15ba0e8fd102f2005aa6ba35f0ce31bc86b324a38cf25ee85d06cc5e7e041fc8"
+      "milestone3a/shap_global_importance.csv": "dba039c727fb87eb47b51499ca9ed5b27a0b1c5c6b39f8740f13cb14539919d2",
+      "milestone3a/shap_importance_by_year.csv": "761b7a3e92ed169ae82051e72789c0730170a6078410cf9b5642d79061e6394f",
+      "milestone3a/shap_interaction_importance.csv": "b1ad97b46aa5865bafc433e6b7afd8257d2ad3763b26d4c9f3ed37b0c3d81c0e",
+      "milestone3a/summary.json": "91da3a9f029f5fb761370bad24748ed1bd8cac6446150b28467c0c7ef3690f0e"
     },
     "artifacts": [
       "milestone3a/shap_global_importance.csv",

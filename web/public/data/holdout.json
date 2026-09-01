@@ -146,11 +146,11 @@
   ],
   "provenance": {
     "artifact_sha256": {
-      "milestone3d/frozen_specifications.json": "dfea292a3cec8e7b30b9749ede36577e5cc411b0f5d2b442c5000433b925fc41",
-      "milestone3d/holdout_rank_ic.csv": "146f33d808417e10e72ac5af3cea8171906beb06a589b6f07233a3ce63e37f1e",
-      "milestone3d/holdout_rank_ic_summary.csv": "87a4c1c006110818e68bb12fc558504dd0abdaaafb6a3ce65dbd9fdc30687782",
-      "milestone3d/portfolio/performance_metrics.csv": "fe9758e8df766da5512cde1371190d106ad4cf6797575a13ecd6e6bc8cff5946",
-      "milestone3d/summary.json": "2e90e35d553cbd652666db193a60bc000a53faaaab078399ba3b919e67650932"
+      "milestone3d/frozen_specifications.json": "a70c6e2969cff4f0bd5625a2e99068e054cd2d08d37cfd569716cd317b443080",
+      "milestone3d/holdout_rank_ic.csv": "47be72d25b4cf9179f27be4610c669c5e2974f9c09e66f8775597892c98317c4",
+      "milestone3d/holdout_rank_ic_summary.csv": "5b47db877939ac95cb572d0bc7bfe1da6c378f3cb8c06c1af9842c83dbff50a2",
+      "milestone3d/portfolio/performance_metrics.csv": "dddb2253a0abcfff219d96fe7b9e90cf7330f2ec7b3c6a326daf029095b9c811",
+      "milestone3d/summary.json": "ef57b2e355fcaebc7b7018a2096f33b193d8c35cf8c84453d4e2abef0ca3e400"
     },
     "artifacts": [
       "milestone3d/frozen_specifications.json",

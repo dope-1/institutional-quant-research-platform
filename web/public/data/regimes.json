@@ -1659,11 +1659,11 @@
   ],
   "provenance": {
     "artifact_sha256": {
-      "milestone3b/portfolio_metrics_by_regime.csv": "7933331498ef6583118a76b7834881c049a02d6c0ee703f35cf736fdc713b37b",
-      "milestone3b/rank_ic_by_regime.csv": "8bc00f02ec88e4fd62133a8d60ba5e2a3fa46f1a4a63bd08179cda5e2f6f6619",
-      "milestone3b/rank_ic_regime_dispersion.csv": "665e60b64aa2ac82582900e57c7ac4a55e7f05e710108b7bb74622454c26255b",
-      "milestone3b/regime_counts.csv": "6e2e1aff1a2e9b46dbf1240a9e64d2715005f70982764ebf139e219711923659",
-      "milestone3b/summary.json": "cc269478dee962a4c5494ed3ba4a666dd4febde79f97b7fc93457aab20153ad9"
+      "milestone3b/portfolio_metrics_by_regime.csv": "27030f10057d33649065702ca94eab48a56e4b8b1341c0cae1b53c3901dd29df",
+      "milestone3b/rank_ic_by_regime.csv": "0e62661fb603741120f085ba91a8020bed3f57c618ef3f6b9292588e0b2bfed4",
+      "milestone3b/rank_ic_regime_dispersion.csv": "b4bdabcd633909dc04a44aab052ae7c8991c4d9a7ac48d82f0e117e9bb736655",
+      "milestone3b/regime_counts.csv": "a8a0859b03294528df9029ba3b0231cde9891593466764355ab857f77a2e9191",
+      "milestone3b/summary.json": "d51fa292c69eded019f814b768892d33a7c5c2949bd4221687d117c4cab4191c"
     },
     "artifacts": [
       "milestone3b/portfolio_metrics_by_regime.csv",
