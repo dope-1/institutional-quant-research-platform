@@ -11,6 +11,12 @@ services with Docker Compose, and 4D adds public-repository safeguards,
 deployment configuration, and CI/CD. None of these milestones changes or
 retrains the research methodology.
 
+## Live dashboard
+
+**Production deployment:** [Open the Institutional Quant Research Dashboard](([https://institutional-quant-research-platfo.vercel.app/]))
+
+The dashboard presents the frozen research evidence, model diagnostics, portfolio performance, regime analysis, optimization results, and prospective 2026 holdout.
+
 ## Current status — Milestone 4D
 
 Completed infrastructure includes:
