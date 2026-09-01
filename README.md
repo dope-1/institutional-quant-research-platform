@@ -13,7 +13,7 @@ retrains the research methodology.
 
 ## Live dashboard
 
-**Production deployment:** [Open the Institutional Quant Research Dashboard](([https://institutional-quant-research-platfo.vercel.app/]))
+**Production deployment:** [Open the Institutional Quant Research Dashboard](https://institutional-quant-research-platfo.vercel.app/)
 
 The dashboard presents the frozen research evidence, model diagnostics, portfolio performance, regime analysis, optimization results, and prospective 2026 holdout.
 
