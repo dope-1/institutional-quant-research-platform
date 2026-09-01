@@ -3,7 +3,6 @@ from __future__ import annotations
 import hashlib
 import json
 import math
-import os
 from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
@@ -858,7 +857,7 @@ class ArtifactRepository:
                     sort_keys=True,
                     allow_nan=False,
                 )
-                + os.linesep
+                + "\n"
             )
             temporary.write_text(content, encoding="utf-8", newline="")
             temporary.replace(path)
