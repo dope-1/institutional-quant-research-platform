@@ -39,3 +39,4 @@ def test_dashboard_container_uses_standalone_production_output() -> None:
     assert 'CMD ["node", "server.js"]' in dockerfile
     assert '/app/.next/standalone' in dockerfile
     assert 'output: "standalone"' in next_config
+    assert "process.env.VERCEL" in next_config
